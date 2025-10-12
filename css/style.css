@@ -119,3 +119,68 @@ h1, h2, h3 {
   border: 3px solid var(--accent-gold);
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
+/* =========================
+   ABOUT SECTION
+   ========================= */
+.about-section {
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 10%;
+}
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: var(--accent-gold);
+  margin-bottom: 20px;
+  border-left: 4px solid var(--accent-gold);
+  padding-left: 10px;
+}
+
+.about-description {
+  color: var(--subtext-color);
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.about-highlights {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.about-highlights li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.about-buttons {
+  margin-top: 25px;
+}
+
+.about-buttons .btn {
+  margin-right: 12px;
+}
+
+.about-image img {
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid var(--accent-gold);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+}

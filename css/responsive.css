@@ -13,3 +13,21 @@
     margin: 8px;
   }
 }
+/* ABOUT SECTION - Mobile Layout */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .about-image img {
+    margin-top: 30px;
+    width: 250px;
+  }
+
+  .about-buttons .btn {
+    display: inline-block;
+    margin: 8px;
+  }
+}
+
