@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .hero-image img {
+    margin-top: 30px;
+  }
+
+  .hero-buttons .btn {
+    display: inline-block;
+    margin: 8px;
+  }
+}
