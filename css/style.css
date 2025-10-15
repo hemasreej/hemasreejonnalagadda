@@ -184,3 +184,248 @@ h1, h2, h3 {
   border: 2px solid var(--accent-gold);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
 }
+
+/* =========================
+   EXPERIENCE SECTION
+   ========================= */
+.experience-section {
+  background-color: var(--bg-color);
+  padding: 100px 10%;
+}
+
+.experience-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline {
+  position: relative;
+  margin-top: 50px;
+  padding-left: 30px;
+  border-left: 2px solid var(--accent-gold);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+  padding-left: 30px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -11px;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  background-color: var(--accent-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.timeline-content {
+  background-color: #151515;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px 25px;
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.25);
+  transform: translateY(-3px);
+}
+
+.exp-role {
+  color: var(--accent-gold);
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.exp-company {
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.exp-duration {
+  color: var(--subtext-color);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.exp-details {
+  color: var(--text-color);
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+.exp-details li {
+  margin-bottom: 8px;
+}
+
+/* =========================
+   PROJECTS SECTION
+   ========================= */
+.projects-section {
+  background-color: var(--bg-color);
+  padding: 100px 10%;
+}
+
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.projects-intro {
+  color: var(--subtext-color);
+  max-width: 700px;
+  margin: 0 auto 60px auto;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.project-card {
+  background-color: #151515;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+  border-color: var(--accent-gold);
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-info {
+  padding: 20px;
+  text-align: left;
+}
+
+.project-info h3 {
+  color: var(--accent-gold);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.project-info p {
+  color: var(--subtext-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.project-tags {
+  margin-bottom: 15px;
+}
+
+.project-tags span {
+  display: inline-block;
+  background-color: rgba(255, 215, 0, 0.15);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  font-size: 0.8rem;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: 4px;
+  transition: 0.3s ease;
+}
+
+.project-tags span:hover {
+  background-color: var(--accent-gold);
+  color: var(--bg-color);
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-links .btn {
+  flex: 1;
+  text-align: center;
+  padding: 8px 12px;
+}
+
+/* =========================
+   FOOTER SECTION
+   ========================= */
+.footer-section {
+  background-color: #0b0b0b;
+  border-top: 1px solid var(--border-color);
+  padding: 50px 10% 30px;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-brand h3 {
+  color: var(--accent-gold);
+  margin-bottom: 8px;
+}
+
+.footer-brand p {
+  color: var(--subtext-color);
+  font-size: 0.9rem;
+}
+
+.footer-links a {
+  color: var(--subtext-color);
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-socials a {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin: 0 8px;
+  transition: color 0.3s ease;
+}
+
+.footer-socials a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: var(--subtext-color);
+}
+
+.footer-bottom .gold {
+  color: var(--accent-gold);
+}
+

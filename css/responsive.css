@@ -31,3 +31,55 @@
   }
 }
 
+/* EXPERIENCE SECTION - Mobile Layout */
+@media (max-width: 768px) {
+  .timeline {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .timeline-item {
+    padding-left: 0;
+  }
+
+  .timeline-dot {
+    display: none;
+  }
+
+  .timeline-content {
+    background-color: #151515;
+    margin-bottom: 25px;
+  }
+}
+
+/* PROJECTS SECTION - Mobile Layout */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-info {
+    text-align: center;
+  }
+
+  .project-links {
+    justify-content: center;
+  }
+}
+
+/* FOOTER SECTION - Mobile Layout */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links a {
+    display: inline-block;
+    margin: 5px 8px;
+  }
+
+  .footer-socials {
+    margin-top: 10px;
+  }
+}
