@@ -83,3 +83,102 @@
     margin-top: 10px;
   }
 }
+
+/* EDUCATION SECTION - Mobile Layout */
+@media (max-width: 768px) {
+  .edu-timeline {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .edu-item {
+    padding-left: 0;
+  }
+
+  .edu-dot {
+    display: none;
+  }
+
+  .edu-content {
+    background-color: #151515;
+    margin-bottom: 25px;
+  }
+}
+
+/* ACHIEVEMENTS SECTION - Mobile Layout (with logos) */
+@media (max-width: 768px) {
+  .achievement-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .achievement-header img {
+    margin-bottom: 10px;
+  }
+
+  .achievement-footer {
+    text-align: center;
+  }
+}
+
+/* =========================
+   CONTACT SECTION - RESPONSIVE
+   ========================= */
+@media (max-width: 1024px) {
+  .contact-section {
+    padding: 80px 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .contact-info, 
+  .contact-form {
+    width: 100%;
+    text-align: center;
+    padding: 25px;
+  }
+
+  .contact-info h3 {
+    margin-bottom: 10px;
+  }
+
+  .contact-socials {
+    justify-content: center;
+  }
+
+  .contact-form button {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .contact-intro {
+    font-size: 0.9rem;
+  }
+
+  .contact-info, 
+  .contact-form {
+    padding: 20px;
+  }
+
+  input, textarea {
+    font-size: 0.9rem;
+  }
+
+  .contact-form button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+
