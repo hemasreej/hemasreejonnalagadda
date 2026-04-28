@@ -1,203 +1,187 @@
+/* ========================================
+   RESPONSIVE DESIGN - Modern Portfolio
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .hero-container,
+  .about-container,
+  .contact-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hero-image,
+  .about-image {
+    order: -1;
+  }
+
+  h1 { font-size: 2.8rem; }
+  h2 { font-size: 2rem; }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-  .hero-container {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-
-  .hero-image img {
-    margin-top: 30px;
-  }
-
-  .hero-buttons .btn {
-    display: inline-block;
-    margin: 8px;
+  section {
+    padding: 80px 5%;
   }
 
   .header-inner {
     flex-direction: column;
-    align-items: stretch;
+    padding: 14px 5%;
+    gap: 12px;
   }
 
   .site-nav {
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     gap: 12px;
   }
 
   .site-nav a {
-    flex: 1;
-    text-align: center;
+    font-size: 0.85rem;
   }
 
   .header-btn {
     width: 100%;
   }
-}
-/* ABOUT SECTION - Mobile Layout */
-@media (max-width: 768px) {
-  .about-container {
-    flex-direction: column-reverse;
-    text-align: center;
+
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+
+  .hero-name {
+    font-size: 2.5rem;
   }
 
-  .about-image img {
-    margin-top: 30px;
-    width: 250px;
+  .hero-title {
+    font-size: 1.3rem;
   }
 
-  .about-buttons .btn {
-    display: inline-block;
-    margin: 8px;
-  }
-}
-
-/* EXPERIENCE SECTION - Mobile Layout */
-@media (max-width: 768px) {
-  .timeline {
-    border-left: none;
-    padding-left: 0;
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
   }
 
-  .timeline-item {
-    padding-left: 0;
+  .hero-buttons .btn {
+    width: 100%;
   }
 
-  .timeline-dot {
-    display: none;
+  .hero-image img {
+    width: 220px;
+    height: 220px;
   }
 
-  .timeline-content {
-    background-color: #151515;
-    margin-bottom: 25px;
+  .about-highlights {
+    grid-template-columns: 1fr;
   }
-}
 
-/* PROJECTS SECTION - Mobile Layout */
-@media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
   }
 
-  .project-info {
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
     text-align: center;
   }
 
-  .project-links {
+  .footer-links {
     justify-content: center;
   }
-}
 
-/* FOOTER SECTION - Mobile Layout */
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
+  .timeline::before,
+  .edu-timeline::before {
+    display: none;
   }
 
-  .footer-links a {
-    display: inline-block;
-    margin: 5px 8px;
-  }
-
-  .footer-socials {
-    margin-top: 10px;
-  }
-}
-
-/* EDUCATION SECTION - Mobile Layout */
-@media (max-width: 768px) {
-  .edu-timeline {
-    border-left: none;
-    padding-left: 0;
-  }
-
-  .edu-item {
-    padding-left: 0;
-  }
-
+  .timeline-dot,
   .edu-dot {
     display: none;
   }
 
-  .edu-content {
-    background-color: #151515;
-    margin-bottom: 25px;
-  }
-}
-
-/* ACHIEVEMENTS SECTION - Mobile Layout (with logos) */
-@media (max-width: 768px) {
-  .achievement-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .achievement-header img {
-    margin-bottom: 10px;
-  }
-
-  .achievement-footer {
-    text-align: center;
-  }
-}
-
-/* =========================
-   CONTACT SECTION - RESPONSIVE
-   ========================= */
-@media (max-width: 1024px) {
-  .contact-section {
-    padding: 80px 5%;
-  }
-}
-
-@media (max-width: 768px) {
-  .contact-content {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .contact-info, 
-  .contact-form {
-    width: 100%;
-    text-align: center;
-    padding: 25px;
-  }
-
-  .contact-info h3 {
-    margin-bottom: 10px;
-  }
-
-  .contact-socials {
-    justify-content: center;
-  }
-
-  .contact-form button {
-    font-size: 0.95rem;
+  .timeline-item,
+  .edu-item {
+    padding-left: 0;
   }
 }
 
 @media (max-width: 480px) {
+  section {
+    padding: 60px 4%;
+  }
+
+  .header-inner {
+    gap: 8px;
+    padding: 12px 4%;
+  }
+
+  .brand {
+    font-size: 1.1rem;
+  }
+
+  .site-nav {
+    gap: 4px;
+  }
+
+  .site-nav a {
+    font-size: 0.75rem;
+  }
+
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.4rem; }
+
+  .hero-name {
+    font-size: 1.8rem;
+  }
+
+  .hero-title {
+    font-size: 1rem;
+  }
+
+  .hero-subtext {
+    font-size: 0.9rem;
+  }
+
   .section-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
-  .contact-intro {
-    font-size: 0.9rem;
+  .hero-image img {
+    width: 180px;
+    height: 180px;
   }
 
-  .contact-info, 
-  .contact-form {
-    padding: 20px;
+  .projects-grid {
+    gap: 16px;
   }
 
-  input, textarea {
-    font-size: 0.9rem;
+  .project-links {
+    gap: 6px;
+  }
+
+  .project-links .btn {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+  }
+
+  input,
+  textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 
   .contact-form button {
+    padding: 12px;
     font-size: 0.9rem;
-    padding: 10px;
   }
 }
 
