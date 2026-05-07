@@ -10,7 +10,6 @@
     gap: 40px;
   }
 
-  .hero-image,
   .about-image {
     order: -1;
   }
@@ -24,6 +23,10 @@
   
   .footer-container {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-telemetry {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
   }
 }
 
@@ -77,6 +80,33 @@
     height: 220px;
   }
 
+  .orbital-frame {
+    width: 300px;
+    height: 300px;
+  }
+
+  .orbital-frame .hero-image img {
+    width: 165px;
+    height: 165px;
+  }
+
+  .defense-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-telemetry {
+    grid-template-columns: 1fr;
+  }
+
+  .hud-overlay {
+    position: static;
+    transform: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
   .about-highlights {
     grid-template-columns: 1fr;
   }
@@ -112,6 +142,11 @@
   .timeline-item,
   .edu-item {
     padding-left: 0;
+  }
+
+  .journey-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -159,6 +194,21 @@
   .hero-image img {
     width: 180px;
     height: 180px;
+  }
+
+  .orbital-frame {
+    width: 250px;
+    height: 250px;
+  }
+
+  .orbital-frame .hero-image img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .intro-gate-controls {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .projects-grid {

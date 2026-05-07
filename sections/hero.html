@@ -2,7 +2,12 @@
      HERO SECTION
      ========================= -->
 <section id="hero" class="hero-section">
-  
+  <div class="hud-overlay" aria-hidden="true">
+    <span>MISSION STATUS: ACTIVE</span>
+    <span>TELEMETRY LINK: STABLE</span>
+    <span>SYSTEM MODE: EMBEDDED R&D</span>
+  </div>
+
   <!-- Profile / Intro -->
   <div class="hero-container">
     
@@ -13,12 +18,27 @@
       
       <p class="hero-subtext">
         Passionate about building real-time, sensor-driven embedded systems 
-        and AI-integrated hardware for healthcare, industrial automation, and defense.
+        and AI-integrated hardware for healthcare, industrial automation, aerospace, and defense.
       </p>
+
+      <div class="hero-telemetry" role="presentation">
+        <div class="telemetry-block">
+          <p>Firmware Reliability</p>
+          <strong data-telemetry="99.1" data-digits="1">99.1</strong>
+        </div>
+        <div class="telemetry-block">
+          <p>Sensor Nodes Built</p>
+          <strong data-telemetry="42" data-digits="0">42</strong>
+        </div>
+        <div class="telemetry-block">
+          <p>Prototypes Deployed</p>
+          <strong data-telemetry="15" data-digits="0">15</strong>
+        </div>
+      </div>
 
       <!-- Action buttons -->
       <div class="hero-buttons">
-        <a href="#projects" class="btn gold-btn">🚀 View Projects</a>
+        <a href="projects.html" class="btn gold-btn">🚀 View Projects</a>
         <a href="assets/pdfs/resume.pdf" target="_blank" class="btn white-btn">📄 Download Resume</a>
       </div>
 
@@ -30,9 +50,23 @@
       </div>
     </div>
 
-    <!-- Right side: profile image -->
-    <div class="hero-image">
-      <img src="assets/images/profile.jpg" alt="Hemasree Jonnalagadda">
+    <!-- Right side: aerospace command card -->
+    <div class="hero-right">
+      <div class="orbital-frame">
+        <div class="hero-image">
+          <img src="assets/images/profile.jpg" alt="Hemasree Jonnalagadda">
+        </div>
+      </div>
+
+      <div class="defense-panel">
+        <h4>Mission Systems</h4>
+        <div class="defense-grid">
+          <div><span>Flight Telemetry</span><strong>ONLINE</strong></div>
+          <div><span>Sensor Fusion</span><strong>NOMINAL</strong></div>
+          <div><span>Embedded Control</span><strong>ACTIVE</strong></div>
+          <div><span>Secure Link</span><strong>ENCRYPTED</strong></div>
+        </div>
+      </div>
     </div>
   </div>
 
