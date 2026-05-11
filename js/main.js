@@ -287,8 +287,8 @@ function initIntroGate() {
         <source src="assets/videos/intro-reel.mp4" type="video/mp4" />
       </video>
       <div class="intro-gate-controls">
-        <p class="intro-gate-note">Add your real intro video: <strong>assets/videos/intro-reel.mp4</strong></p>
-        <button class="intro-gate-enter" type="button">Enter Mission Control</button>
+        <p class="intro-gate-note">Avionics / embedded systems reel — replace with your footage: <strong>assets/videos/intro-reel.mp4</strong></p>
+        <button class="intro-gate-enter" type="button">Initialize Avionics Console</button>
       </div>
     </div>
   `;
