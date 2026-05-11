@@ -1,7 +1,6 @@
 const defaultSectionFiles = [
   "sections/hero.html",
   "sections/about.html",
-  "sections/projects.html",
   "sections/footer.html",
 ];
 
