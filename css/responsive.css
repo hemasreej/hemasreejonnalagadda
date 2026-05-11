@@ -85,9 +85,9 @@
     height: 300px;
   }
 
-  .orbital-frame .hero-image img {
-    width: 165px;
-    height: 165px;
+  .orbital-frame .hero-image {
+    width: 188px;
+    height: 188px;
   }
 
   .defense-grid {
@@ -201,9 +201,9 @@
     height: 250px;
   }
 
-  .orbital-frame .hero-image img {
-    width: 140px;
-    height: 140px;
+  .orbital-frame .hero-image {
+    width: 154px;
+    height: 154px;
   }
 
   .intro-gate-controls {

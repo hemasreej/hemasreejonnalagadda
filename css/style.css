@@ -498,17 +498,16 @@ h3 { font-size: 1.5rem; }
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: slideInRight 0.8s ease-out;
+  /* Opacity-only entrance avoids transform-on-ancestor raster blur on the portrait */
+  animation: heroPortraitIn 0.75s ease-out;
 }
 
-@keyframes slideInRight {
+@keyframes heroPortraitIn {
   from {
     opacity: 0;
-    transform: translateX(40px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
@@ -526,6 +525,12 @@ h3 { font-size: 1.5rem; }
 .hero-image img:hover {
   transform: scale(1.05) rotate(2deg);
   filter: brightness(1.1);
+}
+
+.orbital-frame .hero-image img:hover {
+  /* Large scale upsamples the bitmap and reads as soft / blurry */
+  transform: none;
+  filter: brightness(1.06);
 }
 
 .hero-right {
@@ -566,14 +571,31 @@ h3 { font-size: 1.5rem; }
 }
 
 .orbital-frame .hero-image {
-  width: auto;
+  position: relative;
   z-index: 2;
+  /* Integer px sizes reduce fractional layout scaling (common sharpness loss) */
+  width: 224px;
+  height: 224px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  contain: paint;
+  border: 3px solid var(--accent-gold);
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.22),
+    0 0 72px rgba(0, 217, 255, 0.12);
 }
 
 .orbital-frame .hero-image img {
-  width: 190px;
-  height: 190px;
-  border-radius: 18px;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .defense-panel {
