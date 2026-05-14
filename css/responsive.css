@@ -80,14 +80,9 @@
     height: 220px;
   }
 
-  .orbital-frame {
-    width: 300px;
-    height: 300px;
-  }
-
-  .orbital-frame .hero-image {
-    width: 188px;
-    height: 188px;
+  .hero-photo-frame .hero-image {
+    width: 220px;
+    height: 220px;
   }
 
   .ground-strip {
@@ -217,14 +212,9 @@
     height: 180px;
   }
 
-  .orbital-frame {
-    width: 250px;
-    height: 250px;
-  }
-
-  .orbital-frame .hero-image {
-    width: 154px;
-    height: 154px;
+  .hero-photo-frame .hero-image {
+    width: 200px;
+    height: 200px;
   }
 
   .intro-gate-controls {

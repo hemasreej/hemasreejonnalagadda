@@ -91,12 +91,19 @@ function initInteractiveBackground() {
   starsLayerFar.className = "bg-stars far";
   bg.append(starsLayer, starsLayerFar);
 
-  for (let i = 0; i < 4; i += 1) {
+  const meteorCount = 28;
+  for (let i = 0; i < meteorCount; i += 1) {
     const meteor = document.createElement("span");
     meteor.className = "bg-meteor";
-    meteor.style.top = `${8 + i * 18}%`;
-    meteor.style.left = `${72 + i * 6}%`;
-    meteor.style.animationDelay = `${i * 2.4}s`;
+    const top = 2 + ((i * 17) % 86);
+    const left = 3 + ((i * 23) % 88);
+    meteor.style.top = `${top}%`;
+    meteor.style.left = `${left}%`;
+    meteor.style.animationDelay = `${((i * 0.41) % 7) + (i % 3) * 0.2}s`;
+    const duration = 5.2 + (i % 6) * 0.75;
+    meteor.style.animationDuration = `${duration}s`;
+    const angle = -44 + (i * 5) % 20;
+    meteor.style.setProperty("--meteor-angle", `${angle}deg`);
     bg.append(meteor);
   }
 
