@@ -966,39 +966,254 @@ h3 { font-size: 1.5rem; }
   justify-content: center;
 }
 
-.about-blueprint {
+/* LabVIEW-inspired career instrument (About section) */
+.about-career-panel {
   width: 100%;
-  max-width: 360px;
-  min-height: 380px;
+  max-width: 520px;
   border-radius: 20px;
-  border: 2px solid rgba(56, 189, 248, 0.45);
-  box-shadow: 0 0 40px rgba(56, 189, 248, 0.16);
+  border: 2px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 36px rgba(56, 189, 248, 0.12);
   background:
-    linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(15, 23, 42, 0.8), rgba(2, 6, 23, 0.92));
-  background-size: 20px 20px, 20px 20px, cover;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 24px;
+    linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+    linear-gradient(165deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.98));
+  background-size: 18px 18px, 18px 18px, cover;
+  padding: 18px 18px 14px;
+  font-family: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
 }
 
-.about-blueprint p {
+.about-career-panel-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 14px 16px;
+  align-items: start;
+}
+
+.career-blocks-side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.career-panel-tag {
   color: var(--accent-cyan);
   text-transform: uppercase;
-  letter-spacing: 0.09em;
-  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  font-size: 0.65rem;
+  margin: 0;
+  font-weight: 600;
 }
 
-.about-blueprint h3 {
-  margin: 8px 0;
+.career-block-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.career-node {
+  border-radius: 10px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(7, 18, 38, 0.65);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.career-node span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: 0.02em;
 }
 
-.about-blueprint span {
+.career-node small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.58rem;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+.career-node--cyan { border-color: rgba(56, 189, 248, 0.45); }
+.career-node--green { border-color: rgba(16, 185, 129, 0.45); }
+.career-node--purple { border-color: rgba(167, 139, 250, 0.45); }
+.career-node--orange { border-color: rgba(251, 146, 60, 0.45); }
+
+.career-wire {
+  height: 10px;
+  margin: 0 18px;
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+.career-wire--gold {
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+.career-wire--purple {
+  background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+}
+.career-wire--orange {
+  background: linear-gradient(90deg, transparent, #fb923c, transparent);
+}
+
+.career-wire-legend {
+  font-size: 0.52rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 6px 0 0;
+  opacity: 0.9;
+}
+
+.career-front-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.career-gauges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.career-gauge {
+  position: relative;
+  text-align: center;
+  padding: 6px 4px 8px;
+  border-radius: 10px;
+  background: rgba(4, 10, 24, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.career-gauge-label {
+  display: block;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.career-gauge-arc {
+  width: 56px;
+  height: 28px;
+  margin: 0 auto 2px;
+  border-radius: 56px 56px 0 0;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
+}
+
+.career-gauge-arc--cyan {
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 -4px 14px rgba(56, 189, 248, 0.25);
+}
+.career-gauge-arc--gold {
+  border-color: rgba(250, 204, 21, 0.55);
+  box-shadow: 0 -4px 14px rgba(250, 204, 21, 0.2);
+}
+
+.career-gauge-value {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.career-wave-wrap {
+  border-radius: 10px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(2, 6, 23, 0.5);
+  padding: 8px 8px 6px;
+}
+
+.career-wave-title {
+  font-size: 0.52rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin: 0 0 6px;
+}
+
+.career-wave-chart {
+  height: 64px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 15px,
+    rgba(56, 189, 248, 0.06) 15px,
+    rgba(56, 189, 248, 0.06) 16px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 19px,
+    rgba(56, 189, 248, 0.05) 19px,
+    rgba(56, 189, 248, 0.05) 20px
+  ),
+  rgba(3, 8, 22, 0.6);
+}
+
+.career-wave-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.career-wave-grid {
+  stroke: rgba(56, 189, 248, 0.12);
+  stroke-width: 1;
+}
+
+.career-status-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.career-pill {
+  font-size: 0.52rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.career-pill--ok {
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.08);
+}
+.career-pill--cyan {
+  color: var(--accent-cyan);
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(56, 189, 248, 0.06);
+}
+.career-pill--muted {
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.about-career-panel-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid rgba(56, 189, 248, 0.15);
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.about-career-panel-footer span:first-child {
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 /* =========================

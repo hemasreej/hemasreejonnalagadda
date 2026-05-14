@@ -122,6 +122,16 @@
     grid-template-columns: 1fr;
   }
 
+  .about-career-panel {
+    max-width: 100%;
+  }
+
+  .about-career-panel-inner {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
   }

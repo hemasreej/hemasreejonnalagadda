@@ -38,12 +38,74 @@
       </div>
     </div>
 
-    <!-- Right side: image or graphic -->
-    <div class="about-image about-blueprint">
-      <div>
-        <p>Embedded Blueprint</p>
-        <h3>PCB + Telemetry + AI</h3>
-        <span>Replace with your aerospace/electronics artwork</span>
+    <!-- Right side: LabVIEW-inspired career panel (decorative) -->
+    <div class="about-image">
+      <div class="about-career-panel" role="region" aria-labelledby="career-panel-heading">
+        <div class="about-career-panel-inner">
+          <div class="career-blocks-side">
+            <h3 id="career-panel-heading" class="career-panel-tag">Career flow</h3>
+            <div class="career-block-diagram">
+              <div class="career-node career-node--cyan">
+                <span>Foundations</span>
+                <small>Education & core skills</small>
+              </div>
+              <div class="career-wire career-wire--gold" aria-hidden="true"></div>
+              <div class="career-node career-node--green">
+                <span>Roles</span>
+                <small>Teams & responsibility</small>
+              </div>
+              <div class="career-wire career-wire--purple" aria-hidden="true"></div>
+              <div class="career-node career-node--purple">
+                <span>Projects</span>
+                <small>Shipped prototypes & systems</small>
+              </div>
+              <div class="career-wire career-wire--orange" aria-hidden="true"></div>
+              <div class="career-node career-node--orange">
+                <span>Direction</span>
+                <small>What I’m growing into next</small>
+              </div>
+            </div>
+            <p class="career-wire-legend">Lines show how each stage feeds the next—not a literal tool chain.</p>
+          </div>
+          <div class="career-front-side">
+            <div class="career-gauges">
+              <div class="career-gauge">
+                <span class="career-gauge-label">Projects in portfolio</span>
+                <div class="career-gauge-arc career-gauge-arc--cyan" aria-hidden="true"></div>
+                <strong class="career-gauge-value">15+</strong>
+              </div>
+              <div class="career-gauge">
+                <span class="career-gauge-label">Years building embedded</span>
+                <div class="career-gauge-arc career-gauge-arc--gold" aria-hidden="true"></div>
+                <strong class="career-gauge-value">5+</strong>
+              </div>
+            </div>
+            <div class="career-wave-wrap">
+              <p class="career-wave-title">Momentum — trajectory</p>
+              <div class="career-wave-chart" aria-hidden="true">
+                <svg viewBox="0 0 200 72" preserveAspectRatio="none" class="career-wave-svg">
+                  <defs>
+                    <linearGradient id="careerWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#2dd4bf"/>
+                      <stop offset="100%" stop-color="#38bdf8"/>
+                    </linearGradient>
+                  </defs>
+                  <path class="career-wave-grid" d="M0 18h200M0 36h200M0 54h200" fill="none"/>
+                  <path class="career-wave-line" d="M0 48 Q25 58 50 42 T100 36 T150 22 T200 14" fill="none" stroke="url(#careerWaveGrad)" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="career-status-strip">
+              <span class="career-pill career-pill--ok">Portfolio live</span>
+              <span class="career-pill career-pill--cyan">LabVIEW · DAQ</span>
+              <span class="career-pill career-pill--muted">Firmware & IoT</span>
+            </div>
+          </div>
+        </div>
+        <p class="about-career-panel-footer">
+          <span>Embedded · Test · Systems</span>
+          <span>How I think about work—not a live instrument readout.</span>
+        </p>
       </div>
     </div>
 
