@@ -90,8 +90,19 @@
     height: 188px;
   }
 
-  .defense-grid {
-    grid-template-columns: 1fr;
+  .ground-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .signal-chain-flow {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 6px;
+  }
+
+  .flow-wire {
+    flex: 1 1 40%;
+    max-width: 120px;
   }
 
   .hero-telemetry {

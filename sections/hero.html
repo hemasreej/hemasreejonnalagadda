@@ -59,14 +59,69 @@
         </div>
       </div>
 
-      <div class="defense-panel">
-        <h4>Mission Systems</h4>
-        <div class="defense-grid">
-          <div><span>Flight Telemetry</span><strong>ONLINE</strong></div>
-          <div><span>Sensor Fusion</span><strong>NOMINAL</strong></div>
-          <div><span>Embedded Control</span><strong>ACTIVE</strong></div>
-          <div><span>Secure Link</span><strong>ENCRYPTED</strong></div>
+      <div class="signal-chain-card" data-signal-chain>
+        <p class="sr-only">
+          Illustration of this portfolio's focus: data moves from physical sensors through microcontroller firmware,
+          over a radio or telemetry link, to ground systems where it is monitored and trusted.
+        </p>
+        <div class="signal-chain-head">
+          <h4>Silicon → link → ground</h4>
+          <p class="signal-chain-sub">The stack I work in—sensors, firmware, RF, trusted telemetry.</p>
         </div>
+
+        <div class="signal-chain-flow" aria-hidden="true">
+          <div class="flow-node">
+            <span class="flow-dot" style="--c:#34d399"></span>
+            <span class="flow-label">Sensors</span>
+          </div>
+          <div class="flow-wire flow-wire--uart" title="UART">
+            <span class="flow-packet"></span>
+          </div>
+          <div class="flow-node">
+            <span class="flow-dot" style="--c:#38bdf8"></span>
+            <span class="flow-label">MCU / FW</span>
+          </div>
+          <div class="flow-wire flow-wire--spi" title="SPI">
+            <span class="flow-packet"></span>
+          </div>
+          <div class="flow-node">
+            <span class="flow-dot" style="--c:#fbbf24"></span>
+            <span class="flow-label">RF / link</span>
+          </div>
+          <div class="flow-wire flow-wire--i2c" title="I²C">
+            <span class="flow-packet"></span>
+          </div>
+          <div class="flow-node">
+            <span class="flow-dot" style="--c:#a78bfa"></span>
+            <span class="flow-label">Ground</span>
+          </div>
+        </div>
+        <p class="signal-chain-legend" aria-hidden="true">
+          <span><i class="leg uart"></i> UART</span>
+          <span><i class="leg spi"></i> SPI</span>
+          <span><i class="leg i2c"></i> I²C</span>
+        </p>
+
+        <div class="ground-strip">
+          <div class="ground-readout">
+            <span>Alt (m)</span>
+            <strong data-readout="alt">—</strong>
+          </div>
+          <div class="ground-readout">
+            <span>Roll / Pitch / Yaw (°)</span>
+            <strong data-readout="att">—</strong>
+          </div>
+          <div class="ground-readout">
+            <span>MCU temp (°C)</span>
+            <strong data-readout="temp">—</strong>
+          </div>
+          <div class="ground-readout">
+            <span>Batt (V)</span>
+            <strong data-readout="batt">—</strong>
+          </div>
+        </div>
+
+        <pre class="chain-log" data-chain-log role="log" aria-live="polite"></pre>
       </div>
     </div>
   </div>
