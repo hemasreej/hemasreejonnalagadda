@@ -80,16 +80,171 @@ function initScrollSpy() {
   updateActiveLink();
 }
 
+function starRgb(tint) {
+  if (tint < 0.84) return "255,255,255";
+  if (tint < 0.95) return "255,236,210";
+  return "220,218,235";
+}
+
+function buildCssStarfield(layer, count, maxOpacity) {
+  const gradients = [];
+  const twinkleDuration = 2.4 + Math.random() * 3.2;
+
+  for (let i = 0; i < count; i += 1) {
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const size = 0.8 + Math.random() * 1.6;
+    const opacity = (0.65 + Math.random() * 0.35) * maxOpacity;
+    const tintRoll = Math.random();
+    const color =
+      tintRoll < 0.82
+        ? `rgba(255,255,255,${opacity})`
+        : tintRoll < 0.94
+          ? `rgba(255, 236, 210, ${opacity})`
+          : `rgba(230, 228, 245, ${opacity * 0.9})`;
+    gradients.push(`radial-gradient(${size}px ${size}px at ${x}% ${y}%, ${color}, transparent 68%)`);
+  }
+
+  layer.style.backgroundImage = gradients.join(",");
+  layer.style.animationDuration = `${48 + Math.random() * 40}s, ${twinkleDuration}s`;
+}
+
+function createStarPopulation(viewWidth, viewHeight) {
+  const area = viewWidth * viewHeight;
+  const dustCount = Math.min(5000, Math.max(1800, Math.floor(area / 260)));
+  const mainCount = Math.min(2000, Math.max(650, Math.floor(area / 950)));
+  const stars = [];
+
+  for (let i = 0; i < dustCount; i += 1) {
+    stars.push({
+      x: Math.random() * viewWidth,
+      y: Math.random() * viewHeight,
+      radius: 0.35 + Math.random() * 0.35,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.65 + Math.random() * 1.1,
+      sharpness: 0.85 + Math.random() * 0.35,
+      minAlpha: 0.42,
+      maxAlpha: 0.82,
+      brightness: 0.9 + Math.random() * 0.25,
+      tint: Math.random(),
+      dust: true,
+      spikes: false,
+    });
+  }
+
+  for (let i = 0; i < mainCount; i += 1) {
+    const tierRoll = Math.random();
+    const tier = tierRoll < 0.62 ? "dim" : tierRoll < 0.9 ? "mid" : "bright";
+    const radius =
+      tier === "dim"
+        ? 0.55 + Math.random() * 0.5
+        : tier === "mid"
+          ? 0.95 + Math.random() * 0.55
+          : 1.35 + Math.random() * 0.9;
+    stars.push({
+      x: Math.random() * viewWidth,
+      y: Math.random() * viewHeight,
+      radius,
+      phase: Math.random() * Math.PI * 2,
+      speed: tier === "dim" ? 0.55 + Math.random() * 0.9 : 0.85 + Math.random() * 1.4,
+      sharpness: tier === "bright" ? 0.9 + Math.random() * 0.3 : 1 + Math.random() * 0.4,
+      minAlpha: tier === "dim" ? 0.48 : tier === "mid" ? 0.58 : 0.68,
+      maxAlpha: tier === "dim" ? 0.88 : tier === "mid" ? 0.96 : 1,
+      brightness: 1,
+      tint: Math.random(),
+      dust: false,
+      spikes: tier === "bright",
+    });
+  }
+
+  return stars;
+}
+
+function starScintillation(star, t) {
+  const slow = Math.sin(t * star.speed + star.phase);
+  const mid = Math.sin(t * star.speed * 1.91 + star.phase * 0.63) * 0.42;
+  const fast = Math.sin(t * star.speed * 4.6 + star.phase * 1.7) * 0.18;
+  const shimmer = Math.sin(t * star.speed * 9.3 + star.phase * 2.4) * 0.08;
+  const mix = slow * 0.52 + mid + fast + shimmer;
+  const normalized = (mix + 1) / 2;
+  const shaped = Math.pow(normalized, star.sharpness);
+  const alpha = star.minAlpha + shaped * (star.maxAlpha - star.minAlpha);
+  return Math.min(1, alpha * star.brightness);
+}
+
+function starSpikeAngle(x, y) {
+  return ((x * 12.9898 + y * 78.233) % 628) / 100;
+}
+
+function drawStarCore(ctx, x, y, radius, rgb, alpha, spikes) {
+  const glowRadius = radius * (spikes ? 4.8 : 2.8);
+  const gradient = ctx.createRadialGradient(x, y, 0, x, y, glowRadius);
+  gradient.addColorStop(0, `rgba(${rgb}, ${Math.min(1, alpha * 1.05)})`);
+  gradient.addColorStop(0.08, `rgba(${rgb}, ${alpha * 0.85})`);
+  gradient.addColorStop(0.22, `rgba(${rgb}, ${alpha * 0.35})`);
+  gradient.addColorStop(1, `rgba(${rgb}, 0)`);
+
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(x, y, glowRadius, 0, Math.PI * 2);
+  ctx.fill();
+
+  const coreRadius = Math.max(0.55, radius * 0.42);
+  ctx.beginPath();
+  ctx.arc(x, y, coreRadius, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(${rgb}, ${Math.min(1, alpha * 0.95)})`;
+  ctx.fill();
+
+  if (!spikes || radius < 1 || alpha < 0.35) return;
+
+  const spikeLength = radius * 5.5 + alpha * 2.2;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(starSpikeAngle(x, y));
+  ctx.globalAlpha = alpha * 0.32;
+  ctx.lineCap = "round";
+
+  for (let i = 0; i < 4; i += 1) {
+    const angle = (Math.PI / 2) * i;
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    const spikeGradient = ctx.createLinearGradient(
+      -spikeLength * cos,
+      -spikeLength * sin,
+      spikeLength * cos,
+      spikeLength * sin,
+    );
+    spikeGradient.addColorStop(0, `rgba(${rgb}, 0)`);
+    spikeGradient.addColorStop(0.45, `rgba(${rgb}, ${alpha * 0.55})`);
+    spikeGradient.addColorStop(0.5, `rgba(255,255,255,${alpha * 0.75})`);
+    spikeGradient.addColorStop(0.55, `rgba(${rgb}, ${alpha * 0.55})`);
+    spikeGradient.addColorStop(1, `rgba(${rgb}, 0)`);
+    ctx.strokeStyle = spikeGradient;
+    ctx.lineWidth = 0.45;
+    ctx.beginPath();
+    ctx.moveTo(-spikeLength * cos, -spikeLength * sin);
+    ctx.lineTo(spikeLength * cos, spikeLength * sin);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
 function initInteractiveBackground() {
   const bg = document.getElementById("interactive-bg");
   if (!bg) return;
   bg.innerHTML = "";
 
+  const starsLayerNear = document.createElement("div");
+  starsLayerNear.className = "bg-stars near";
   const starsLayer = document.createElement("div");
   starsLayer.className = "bg-stars";
   const starsLayerFar = document.createElement("div");
   starsLayerFar.className = "bg-stars far";
-  bg.append(starsLayer, starsLayerFar);
+  buildCssStarfield(starsLayerNear, 220, 1);
+  buildCssStarfield(starsLayer, 300, 1);
+  buildCssStarfield(starsLayerFar, 220, 0.9);
+  bg.append(starsLayerFar, starsLayer, starsLayerNear);
 
   const meteorCount = 28;
   for (let i = 0; i < meteorCount; i += 1) {
@@ -116,7 +271,7 @@ function initInteractiveBackground() {
   const trailsCanvas = document.createElement("canvas");
   trailsCanvas.className = "bg-layer bg-trails";
 
-  bg.append(gridCanvas, starCanvas, circuitCanvas, trailsCanvas);
+  bg.append(gridCanvas, circuitCanvas, trailsCanvas, starCanvas);
 
   const layers = {
     grid: gridCanvas.getContext("2d"),
@@ -139,14 +294,7 @@ function initInteractiveBackground() {
     pulse: Math.random() * Math.PI * 2,
   }));
 
-  const stars = Array.from({ length: 560 }, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    radius: Math.random() * 2.1 + 0.35,
-    twinkle: Math.random() * Math.PI * 2,
-    speed: 0.45 + Math.random() * 1.25,
-    tint: Math.random(),
-  }));
+  let stars = createStarPopulation(width, height);
 
   function resize() {
     width = window.innerWidth;
@@ -155,38 +303,35 @@ function initInteractiveBackground() {
       canvas.width = width;
       canvas.height = height;
     });
+    stars = createStarPopulation(width, height);
   }
 
   function drawStars() {
     const ctx = layers.stars;
     ctx.clearRect(0, 0, width, height);
-    stars.forEach((star) => {
-      const pulse = (Math.sin(time * star.speed + star.twinkle) + 1) / 2;
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.radius + pulse * 0.85, 0, Math.PI * 2);
-      const alpha = 0.55 + pulse * 0.45;
-      const color =
-        star.tint < 0.72
-          ? `rgba(255,255,255,${alpha})`
-          : star.tint < 0.9
-            ? `rgba(147,197,253,${alpha})`
-            : `rgba(250,204,21,${alpha * 0.9})`;
-      ctx.fillStyle = color;
-      ctx.fill();
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
 
-      if (star.radius > 1.9) {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius * 2.6, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${alpha * 0.11})`;
-        ctx.fill();
+    stars.forEach((star) => {
+      const alpha = starScintillation(star, time);
+      const rgb = starRgb(star.tint);
+
+      if (star.dust) {
+        ctx.fillStyle = `rgba(${rgb}, ${alpha})`;
+        ctx.fillRect(star.x, star.y, 1.1, 1.1);
+        return;
       }
+
+      drawStarCore(ctx, star.x, star.y, star.radius, rgb, alpha, star.spikes);
     });
+
+    ctx.restore();
   }
 
   function drawGrid() {
     const ctx = layers.grid;
     ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = "rgba(96, 165, 250, 0.12)";
+    ctx.strokeStyle = "rgba(148, 152, 168, 0.055)";
     ctx.lineWidth = 1;
 
     const baseSpacing = 52;
@@ -219,7 +364,7 @@ function initInteractiveBackground() {
 
       const heat = (Math.sin(time * 1.2 + node.pulse) + 1) / 2;
       const glow = 120 + Math.floor(100 * heat);
-      ctx.fillStyle = `rgba(34, ${glow}, 255, ${0.2 + heat * 0.3})`;
+      ctx.fillStyle = `rgba(210, ${180 + Math.floor(heat * 40)}, ${220 + Math.floor(heat * 20)}, ${0.12 + heat * 0.18})`;
       ctx.beginPath();
       ctx.arc(n.x, n.y, 1.8 + heat * 2.8, 0, Math.PI * 2);
       ctx.fill();
@@ -230,7 +375,7 @@ function initInteractiveBackground() {
           y: Math.floor((index + 1) / 6) * (height / 6.5) + 80,
         };
         const pulse = (Math.sin(time * 2 + node.pulse) + 1) / 2;
-        ctx.strokeStyle = `rgba(56, 189, 248, ${0.06 + pulse * 0.24})`;
+        ctx.strokeStyle = `rgba(170, 165, 190, ${0.04 + pulse * 0.12})`;
         ctx.beginPath();
         ctx.moveTo(n.x, n.y);
         ctx.lineTo(next.x, next.y);
