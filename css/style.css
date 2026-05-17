@@ -13,6 +13,11 @@
   --success: #10b981;
   --border-light: rgba(255, 215, 0, 0.1);
   --border-darker: rgba(255, 215, 0, 0.15);
+  --section-surface: linear-gradient(
+    180deg,
+    rgba(8, 8, 12, 0.38) 0%,
+    rgba(6, 6, 10, 0.28) 100%
+  );
 }
 
 * {
@@ -349,15 +354,14 @@ h3 { font-size: 1.5rem; }
 
 .white-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 217, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.25);
 }
 .hero-section {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 110vh;
-  background:
-    linear-gradient(135deg, rgba(3, 8, 22, 0.76) 0%, rgba(2, 6, 18, 0.84) 58%, rgba(5, 10, 24, 0.7) 100%);
+  background: var(--section-surface);
   position: relative;
   overflow: hidden;
 }
@@ -417,12 +421,13 @@ h3 { font-size: 1.5rem; }
   position: absolute;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 72%);
+  background: radial-gradient(circle, rgba(120, 100, 80, 0.06) 0%, transparent 72%);
   border-radius: 50%;
   top: 50%;
   right: -100px;
   transform: translateY(-50%);
   animation: float 6s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes float {
@@ -509,10 +514,10 @@ h3 { font-size: 1.5rem; }
 }
 
 .telemetry-block {
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   padding: 12px 14px;
-  background: rgba(10, 14, 39, 0.5);
+  background: rgba(12, 12, 16, 0.55);
 }
 
 .telemetry-block p {
@@ -524,7 +529,7 @@ h3 { font-size: 1.5rem; }
 }
 
 .telemetry-block strong {
-  color: var(--accent-cyan);
+  color: var(--accent-gold);
   font-size: 1.3rem;
 }
 
@@ -579,7 +584,7 @@ h3 { font-size: 1.5rem; }
   border-radius: 20px;
   border: 3px solid var(--accent-gold);
   box-shadow: 0 0 40px rgba(255, 215, 0, 0.2),
-              0 0 80px rgba(0, 217, 255, 0.1);
+              0 0 60px rgba(80, 70, 60, 0.08);
   object-fit: cover;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -621,9 +626,9 @@ h3 { font-size: 1.5rem; }
   contain: paint;
   border: 3px solid var(--accent-gold);
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.35),
-    0 0 36px rgba(255, 215, 0, 0.2),
-    0 0 56px rgba(0, 217, 255, 0.12);
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 36px rgba(255, 215, 0, 0.18),
+    0 0 48px rgba(80, 70, 60, 0.08);
 }
 
 .hero-photo-frame .hero-image img {
@@ -653,15 +658,15 @@ h3 { font-size: 1.5rem; }
 
 .signal-chain-card {
   width: min(480px, 100%);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 14px;
   padding: 14px 14px 12px;
-  background: linear-gradient(145deg, rgba(7, 19, 40, 0.92), rgba(2, 10, 24, 0.94));
+  background: linear-gradient(145deg, rgba(14, 14, 18, 0.88), rgba(8, 8, 12, 0.92));
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
 .signal-chain-head h4 {
-  color: var(--accent-cyan);
+  color: var(--accent-gold);
   font-size: 0.82rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -945,7 +950,7 @@ h3 { font-size: 1.5rem; }
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, rgba(10, 14, 39, 0.5) 0%, rgba(15, 21, 53, 0.3) 100%);
+  background: var(--section-surface);
 }
 
 .about-container {
@@ -1012,12 +1017,12 @@ h3 { font-size: 1.5rem; }
   width: 100%;
   max-width: 520px;
   border-radius: 20px;
-  border: 2px solid rgba(56, 189, 248, 0.4);
-  box-shadow: 0 0 36px rgba(56, 189, 248, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 36px rgba(0, 0, 0, 0.35);
   background:
-    linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
-    linear-gradient(165deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.98));
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(165deg, rgba(14, 14, 18, 0.94), rgba(8, 8, 12, 0.96));
   background-size: 18px 18px, 18px 18px, cover;
   padding: 18px 18px 14px;
   font-family: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
@@ -1037,7 +1042,7 @@ h3 { font-size: 1.5rem; }
 }
 
 .career-panel-tag {
-  color: var(--accent-cyan);
+  color: var(--accent-gold);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.65rem;
@@ -1262,7 +1267,7 @@ h3 { font-size: 1.5rem; }
    ========================= */
 
 .experience-section {
-  background: linear-gradient(180deg, rgba(15, 21, 53, 0.3) 0%, rgba(10, 14, 39, 0.5) 100%);
+  background: var(--section-surface);
 }
 
 .experience-container {
@@ -1390,7 +1395,7 @@ h3 { font-size: 1.5rem; }
    ========================= */
 
 .projects-section {
-  background: linear-gradient(180deg, rgba(10, 14, 39, 0.5) 0%, rgba(15, 21, 53, 0.3) 100%);
+  background: var(--section-surface);
 }
 
 .projects-container {
@@ -1626,7 +1631,7 @@ h3 { font-size: 1.5rem; }
    ========================= */
 
 .education-section {
-  background: linear-gradient(180deg, rgba(15, 21, 53, 0.3) 0%, rgba(10, 14, 39, 0.5) 100%);
+  background: var(--section-surface);
 }
 
 .education-container {
@@ -1716,7 +1721,7 @@ h3 { font-size: 1.5rem; }
    ========================= */
 
 .achievements-section {
-  background: linear-gradient(180deg, rgba(10, 14, 39, 0.5) 0%, rgba(15, 21, 53, 0.3) 100%);
+  background: var(--section-surface);
   text-align: center;
 }
 
@@ -1825,7 +1830,7 @@ h3 { font-size: 1.5rem; }
    ========================= */
 
 .journey-section {
-  background: linear-gradient(180deg, rgba(15, 21, 53, 0.35) 0%, rgba(10, 14, 39, 0.55) 100%);
+  background: var(--section-surface);
 }
 
 .journey-container {
@@ -1897,7 +1902,7 @@ h3 { font-size: 1.5rem; }
    ========================= */
 
 .gallery-section {
-  background: linear-gradient(180deg, rgba(10, 14, 39, 0.5) 0%, rgba(15, 21, 53, 0.35) 100%);
+  background: var(--section-surface);
 }
 
 .gallery-container {
@@ -1960,7 +1965,7 @@ h3 { font-size: 1.5rem; }
    ========================= */
 
 .contact-section {
-  background: linear-gradient(180deg, rgba(15, 21, 53, 0.3) 0%, rgba(10, 14, 39, 0.5) 100%);
+  background: var(--section-surface);
 }
 
 .contact-container {
