@@ -152,17 +152,17 @@
 }
 
 /* Icon animations */
-.hero-socials a,
+.connect-block,
 .contact-socials a,
 .footer-socials a {
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.hero-socials a:active,
+.connect-block:active,
 .contact-socials a:active,
 .footer-socials a:active {
   animation: pulse 0.4s ease-out;
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 
 /* Smooth scroll behavior for nav links */

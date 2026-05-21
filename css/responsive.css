@@ -25,7 +25,7 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .hero-telemetry {
+  .hero-connect {
     grid-template-columns: repeat(2, minmax(120px, 1fr));
   }
 }
@@ -100,7 +100,7 @@
     max-width: 120px;
   }
 
-  .hero-telemetry {
+  .hero-connect {
     grid-template-columns: 1fr;
   }
 
