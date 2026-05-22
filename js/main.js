@@ -110,8 +110,8 @@ function buildCssStarfield(layer, count, maxOpacity) {
 
 function createStarPopulation(viewWidth, viewHeight) {
   const area = viewWidth * viewHeight;
-  const dustCount = Math.min(3200, Math.max(1100, Math.floor(area / 380)));
-  const mainCount = Math.min(1100, Math.max(420, Math.floor(area / 1400)));
+  const dustCount = Math.min(5000, Math.max(1800, Math.floor(area / 260)));
+  const mainCount = Math.min(2000, Math.max(650, Math.floor(area / 950)));
   const stars = [];
 
   for (let i = 0; i < dustCount; i += 1) {
@@ -243,9 +243,9 @@ function initInteractiveBackground() {
   starsLayer.className = "bg-stars";
   const starsLayerFar = document.createElement("div");
   starsLayerFar.className = "bg-stars far";
-  buildCssStarfield(starsLayerNear, 180, 1);
-  buildCssStarfield(starsLayer, 260, 1);
-  buildCssStarfield(starsLayerFar, 180, 0.9);
+  buildCssStarfield(starsLayerNear, 220, 1);
+  buildCssStarfield(starsLayer, 300, 1);
+  buildCssStarfield(starsLayerFar, 220, 0.9);
   bg.append(starsLayerFar, starsLayer, starsLayerNear);
 
   const meteorCount = 28;
@@ -275,20 +275,51 @@ function initInteractiveBackground() {
 
   bg.append(gridCanvas, circuitCanvas, trailsCanvas, starCanvas);
 
-  const layers = {
-    grid: gridCanvas.getContext("2d"),
-    stars: starCanvas.getContext("2d"),
-    circuit: circuitCanvas.getContext("2d"),
-    trails: trailsCanvas.getContext("2d"),
-  };
-
-  if (!layers.grid || !layers.stars || !layers.circuit || !layers.trails) return;
-
   let width = window.innerWidth;
   let height = window.innerHeight;
   let time = 0;
+  let frame = 0;
   let mouseX = width / 2;
   let mouseY = height / 2;
+
+  const starRenderer =
+    typeof createWebGLStarfieldRenderer === "function" ? createWebGLStarfieldRenderer(starCanvas) : null;
+  const dpr = typeof getBackgroundDpr === "function" ? getBackgroundDpr() : 1;
+
+  const layers = { grid: null, stars: null, circuit: null, trails: null };
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    if (typeof applyCanvas2dSize === "function") {
+      layers.grid = applyCanvas2dSize(gridCanvas, width, height, dpr);
+      layers.circuit = applyCanvas2dSize(circuitCanvas, width, height, dpr);
+      layers.trails = applyCanvas2dSize(trailsCanvas, width, height, dpr);
+      if (!starRenderer) layers.stars = applyCanvas2dSize(starCanvas, width, height, dpr);
+    } else {
+      [gridCanvas, circuitCanvas, trailsCanvas].forEach((canvas) => {
+        canvas.width = width;
+        canvas.height = height;
+      });
+      layers.grid = gridCanvas.getContext("2d");
+      layers.circuit = circuitCanvas.getContext("2d");
+      layers.trails = trailsCanvas.getContext("2d");
+      if (!starRenderer) {
+        starCanvas.width = width;
+        starCanvas.height = height;
+        layers.stars = starCanvas.getContext("2d");
+      }
+    }
+
+    if (starRenderer) starRenderer.resize(width, height, dpr);
+
+    stars = createStarPopulation(width, height);
+    if (starRenderer) starRenderer.setStars(stars);
+  }
+
+  if (!starRenderer) layers.stars = starCanvas.getContext("2d");
+  if (!starRenderer && !layers.stars) return;
 
   const nodes = Array.from({ length: 36 }, (_, index) => ({
     x: (index % 6) * (width / 6) + 80,
@@ -297,19 +328,16 @@ function initInteractiveBackground() {
   }));
 
   let stars = createStarPopulation(width, height);
-
-  function resize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    [gridCanvas, starCanvas, circuitCanvas, trailsCanvas].forEach((canvas) => {
-      canvas.width = width;
-      canvas.height = height;
-    });
-    stars = createStarPopulation(width, height);
-  }
+  resize();
 
   function drawStars() {
+    if (starRenderer) {
+      starRenderer.draw(time);
+      return;
+    }
+
     const ctx = layers.stars;
+    if (!ctx) return;
     ctx.clearRect(0, 0, width, height);
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
@@ -332,6 +360,7 @@ function initInteractiveBackground() {
 
   function drawGrid() {
     const ctx = layers.grid;
+    if (!ctx) return;
     ctx.clearRect(0, 0, width, height);
     ctx.strokeStyle = "rgba(148, 152, 168, 0.055)";
     ctx.lineWidth = 1;
@@ -355,6 +384,7 @@ function initInteractiveBackground() {
 
   function drawCircuit() {
     const ctx = layers.circuit;
+    if (!ctx) return;
     ctx.clearRect(0, 0, width, height);
     ctx.lineWidth = 1.1;
 
@@ -388,6 +418,7 @@ function initInteractiveBackground() {
 
   function drawTrails() {
     const ctx = layers.trails;
+    if (!ctx) return;
     ctx.clearRect(0, 0, width, height);
     const scrollFactor = window.scrollY * 0.0003;
 
@@ -416,9 +447,10 @@ function initInteractiveBackground() {
   let running = true;
 
   function paintFrame() {
-    drawGrid();
+    frame += 1;
     drawStars();
-    drawCircuit();
+    if (frame % 2 === 0) drawGrid();
+    if (frame % 3 === 0) drawCircuit();
     drawTrails();
   }
 
@@ -442,7 +474,6 @@ function initInteractiveBackground() {
     }
   });
 
-  resize();
   if (reducedMotion) paintFrame();
   else animate();
 }
