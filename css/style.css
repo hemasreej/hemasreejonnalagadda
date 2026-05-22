@@ -1419,12 +1419,15 @@ h3 { font-size: 1.5rem; }
   position: absolute;
   top: 18px;
   right: 18px;
+  max-width: 148px;
   padding: 6px 11px;
   border-radius: 8px;
-  font-size: 0.58rem;
+  font-size: 0.54rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-align: right;
+  line-height: 1.35;
   color: var(--exp-accent, var(--accent-gold));
   background: var(--exp-accent-soft, rgba(255, 215, 0, 0.1));
   border: 1px solid color-mix(in srgb, var(--exp-accent, var(--accent-gold)) 40%, transparent);
