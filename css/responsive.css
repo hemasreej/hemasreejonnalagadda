@@ -163,6 +163,47 @@
     padding-left: 0;
   }
 
+  .exp-category-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .exp-impact-strip {
+    padding-right: 0;
+  }
+
+  .exp-role {
+    padding-right: 0;
+  }
+
+  .edu-card-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .edu-card-badges {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 20px 22px;
+  }
+
+  .edu-badges-title {
+    width: 100%;
+  }
+
+  .edu-badge {
+    flex: 1 1 auto;
+    min-width: 120px;
+  }
+
+  .edu-badge--accent {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
   .journey-grid,
   .gallery-grid {
     grid-template-columns: 1fr;
