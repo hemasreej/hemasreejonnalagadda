@@ -87,16 +87,13 @@ function initInteractiveBackground() {
   interactiveBgReady = true;
 
   if (typeof mountSpaceBackground !== "function") {
-    console.warn("Space background module missing — check js/starfield-renderer.js is loaded.");
+    console.warn(
+      "Space background module missing — load js/starfield-renderer.js before main.js."
+    );
     return;
   }
 
-  const start = () => mountSpaceBackground(bg);
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(start, { timeout: 800 });
-  } else {
-    window.setTimeout(start, 0);
-  }
+  mountSpaceBackground(bg);
 }
 
 function initIntroGate() {
@@ -106,7 +103,7 @@ function initIntroGate() {
   gate.className = "intro-gate";
   gate.innerHTML = `
     <div class="intro-gate-card">
-      <video class="intro-video" autoplay muted loop playsinline poster="assets/images/intro-video-cover.jpg">
+      <video class="intro-video" muted loop playsinline preload="none" poster="assets/images/intro-video-cover.jpg">
         <source src="assets/videos/intro-reel.mp4" type="video/mp4" />
       </video>
       <div class="intro-gate-controls">
@@ -118,11 +115,21 @@ function initIntroGate() {
   document.body.appendChild(gate);
 
   const enterBtn = gate.querySelector(".intro-gate-enter");
+  const introVideo = gate.querySelector(".intro-video");
   if (enterBtn) {
     enterBtn.addEventListener("click", () => {
+      if (typeof window.schedulePortfolioHeavyBg === "function") {
+        window.schedulePortfolioHeavyBg();
+      }
       gate.classList.add("hidden");
       window.setTimeout(() => gate.remove(), 480);
     });
+  }
+  if (introVideo) {
+    introVideo.addEventListener("mouseenter", () => {
+      introVideo.preload = "auto";
+      introVideo.play().catch(() => {});
+    }, { once: true });
   }
 }
 
@@ -280,7 +287,7 @@ function initSubmitTracking() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initInteractiveBackground();
   loadSections();
   initIntroGate();
+  requestAnimationFrame(() => initInteractiveBackground());
 });

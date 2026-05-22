@@ -15,8 +15,8 @@
   --border-darker: rgba(255, 215, 0, 0.15);
   --section-surface: linear-gradient(
     180deg,
-    rgba(8, 8, 12, 0.38) 0%,
-    rgba(6, 6, 10, 0.28) 100%
+    rgba(8, 8, 12, 0.2) 0%,
+    rgba(6, 6, 10, 0.12) 100%
   );
 }
 
@@ -31,12 +31,17 @@ html {
 }
 
 body {
-  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+  background: #020203;
   color: var(--text-primary);
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
   position: relative;
   overflow-x: hidden;
+}
+
+main#page-sections {
+  position: relative;
+  z-index: 1;
 }
 
 #interactive-bg {
@@ -55,6 +60,7 @@ body {
 .bg-stars {
   position: absolute;
   inset: 0;
+  z-index: 0;
   animation:
     driftStars 55s linear infinite,
     cssStarTwinkle 3.6s ease-in-out infinite alternate;
@@ -77,31 +83,16 @@ body {
     cssStarTwinkle 2.8s ease-in-out infinite alternate;
 }
 
-.bg-stars-tile {
-  background-repeat: repeat;
-  background-size: 512px 512px;
-  will-change: transform, opacity;
-}
-
-.bg-grid-css {
-  position: absolute;
-  inset: -40px;
-  pointer-events: none;
-  opacity: 0.38;
-  --grid-pan-x: 0px;
-  --grid-pan-y: 0px;
-  transform: translate3d(var(--grid-pan-x), var(--grid-pan-y), 0);
-  background-image:
-    linear-gradient(rgba(148, 152, 168, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 152, 168, 0.07) 1px, transparent 1px);
-  background-size: 52px 52px;
-  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 78%);
+.bg-grid {
+  z-index: 1;
+  opacity: 0.55;
 }
 
 .bg-meteor {
   position: absolute;
   width: 130px;
   height: 1px;
+  z-index: 6;
   --meteor-angle: -35deg;
   background: linear-gradient(90deg, rgba(56, 189, 248, 0), rgba(56, 189, 248, 0.95));
   transform: rotate(var(--meteor-angle));
@@ -164,24 +155,26 @@ body {
 .bg-layer {
   position: absolute;
   inset: 0;
+  z-index: 2;
 }
 
 .bg-star-canvas {
+  z-index: 3;
   opacity: 1;
   mix-blend-mode: screen;
 }
 
 .bg-grid {
-  opacity: 0.45;
+  opacity: 0.5;
 }
 
 .bg-circuit {
   mix-blend-mode: screen;
-  opacity: 0.2;
+  opacity: 0.32;
 }
 
 .bg-trails {
-  opacity: 0.18;
+  opacity: 0.28;
 }
 
 body::before {
