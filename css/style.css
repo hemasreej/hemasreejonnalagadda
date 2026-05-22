@@ -77,6 +77,27 @@ body {
     cssStarTwinkle 2.8s ease-in-out infinite alternate;
 }
 
+.bg-stars-tile {
+  background-repeat: repeat;
+  background-size: 512px 512px;
+  will-change: transform, opacity;
+}
+
+.bg-grid-css {
+  position: absolute;
+  inset: -40px;
+  pointer-events: none;
+  opacity: 0.38;
+  --grid-pan-x: 0px;
+  --grid-pan-y: 0px;
+  transform: translate3d(var(--grid-pan-x), var(--grid-pan-y), 0);
+  background-image:
+    linear-gradient(rgba(148, 152, 168, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 152, 168, 0.07) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 78%);
+}
+
 .bg-meteor {
   position: absolute;
   width: 130px;
