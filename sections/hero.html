@@ -71,63 +71,67 @@
 
       <div class="signal-chain-card" data-signal-chain>
         <p class="sr-only">
-          Illustration of this portfolio's focus: data moves from physical sensors through microcontroller firmware,
-          over a radio or telemetry link, to ground systems where it is monitored and trusted.
+          Career capabilities: hardware engineering, firmware development, research and prototyping,
+          and integrated embedded systems delivery.
         </p>
         <div class="signal-chain-head">
-          <h4>Silicon → link → ground</h4>
-          <p class="signal-chain-sub">The stack I work in—sensors, firmware, RF, trusted telemetry.</p>
+          <p class="signal-chain-tag">Embedded career · concept to field</p>
+          <h4>Hardware → firmware → R&amp;D → systems</h4>
+          <p class="signal-chain-sub">
+            The roles I take on—board bring-up, firmware, prototypes, and shipped embedded products.
+          </p>
         </div>
 
         <div class="signal-chain-flow" aria-hidden="true">
           <div class="flow-node">
             <span class="flow-dot" style="--c:#34d399"></span>
-            <span class="flow-label">Sensors</span>
+            <span class="flow-label">Hardware</span>
           </div>
-          <div class="flow-wire flow-wire--uart" title="UART">
+          <div class="flow-wire flow-wire--hw" title="Hardware to firmware">
             <span class="flow-packet"></span>
           </div>
           <div class="flow-node">
             <span class="flow-dot" style="--c:#38bdf8"></span>
-            <span class="flow-label">MCU / FW</span>
+            <span class="flow-label">Firmware</span>
           </div>
-          <div class="flow-wire flow-wire--spi" title="SPI">
+          <div class="flow-wire flow-wire--fw" title="Firmware to R&amp;D">
             <span class="flow-packet"></span>
           </div>
           <div class="flow-node">
             <span class="flow-dot" style="--c:#fbbf24"></span>
-            <span class="flow-label">RF / link</span>
+            <span class="flow-label">R&amp;D</span>
           </div>
-          <div class="flow-wire flow-wire--i2c" title="I²C">
+          <div class="flow-wire flow-wire--rd" title="R&amp;D to systems">
             <span class="flow-packet"></span>
           </div>
           <div class="flow-node">
             <span class="flow-dot" style="--c:#a78bfa"></span>
-            <span class="flow-label">Ground</span>
+            <span class="flow-label">Systems</span>
           </div>
         </div>
         <p class="signal-chain-legend" aria-hidden="true">
-          <span><i class="leg uart"></i> UART</span>
-          <span><i class="leg spi"></i> SPI</span>
-          <span><i class="leg i2c"></i> I²C</span>
+          <span><i class="leg leg-hw"></i> Boards &amp; sensors</span>
+          <span><i class="leg leg-fw"></i> C / RTOS / drivers</span>
+          <span><i class="leg leg-rd"></i> Bench &amp; validation</span>
+          <span><i class="leg leg-sys"></i> Integration &amp; deploy</span>
         </p>
 
         <div class="ground-strip">
           <div class="ground-readout">
-            <span>Alt (m)</span>
-            <strong data-readout="alt">—</strong>
+            <span>Hardware</span>
+            <strong data-readout="hw">—</strong>
           </div>
           <div class="ground-readout">
-            <span>Roll / Pitch / Yaw (°)</span>
-            <strong data-readout="att">—</strong>
+            <span>Firmware</span>
+            <strong data-readout="fw">—</strong>
           </div>
           <div class="ground-readout">
-            <span>MCU temp (°C)</span>
-            <strong data-readout="temp">—</strong>
+            <span>R&amp;D</span>
+            <strong data-readout="rd">—</strong>
           </div>
           <div class="ground-readout">
-            <span>Batt (V)</span>
-            <strong data-readout="batt">—</strong>
+            <span>Systems</span>
+            <strong data-readout="sys">—</strong>
           </div>
         </div>
 

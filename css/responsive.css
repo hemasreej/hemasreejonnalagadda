@@ -22,7 +22,13 @@
   }
   
   .footer-container {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-socials {
+    justify-content: center;
   }
 
   .hero-connect {
@@ -113,10 +119,6 @@
     margin-bottom: 20px;
   }
 
-  .about-highlights {
-    grid-template-columns: 1fr;
-  }
-
   .about-career-panel {
     max-width: 100%;
   }
@@ -136,12 +138,13 @@
   }
 
   .footer-container {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
     text-align: center;
   }
 
-  .footer-links {
+  .footer-socials {
     justify-content: center;
   }
 

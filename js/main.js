@@ -194,43 +194,40 @@ function initSignalChainCard() {
   const root = document.querySelector("[data-signal-chain]");
   if (!root) return;
 
-  const altEl = root.querySelector('[data-readout="alt"]');
-  const attEl = root.querySelector('[data-readout="att"]');
-  const tempEl = root.querySelector('[data-readout="temp"]');
-  const battEl = root.querySelector('[data-readout="batt"]');
+  const hwEl = root.querySelector('[data-readout="hw"]');
+  const fwEl = root.querySelector('[data-readout="fw"]');
+  const rdEl = root.querySelector('[data-readout="rd"]');
+  const sysEl = root.querySelector('[data-readout="sys"]');
   const logEl = root.querySelector("[data-chain-log]");
-  if (!altEl || !attEl || !tempEl || !battEl || !logEl) return;
+  if (!hwEl || !fwEl || !rdEl || !sysEl || !logEl) return;
 
-  let altM = 412.0;
-  let roll = 2.14;
-  let pitch = -0.38;
-  let yaw = 118.3;
-  let tMcu = 36.8;
-  let vBatt = 7.42;
+  let hwPcbRev = 2.1;
+  let fwBuild = 1.42;
+  let rdPrototypes = 3;
+  let sysDeployed = 2;
 
   const logTemplates = [
-    "[DRV] IMU_WHOAMI=0x47 | DRDY=1",
-    "[I2C] 0x77 ACK | baro burst 6B OK",
-    "[SPI] AS5047 READ @10MHz | frame OK",
-    "[TLM] SEQ=0x4A1B len=48 CRC16 PASS",
-    "[RTOS] idle=94% | stack_hwm 612/2048 B",
-    "[RF] RSSI=-67 dBm | FSK 50k | LOCK",
-    "[PWR] DCDC=NOM | Iq≈18 mA",
+    "[HW] PCB bring-up OK | sensor rail 3V3 stable",
+    "[FW] FreeRTOS online | drivers + comm stack loaded",
+    "[R&D] bench test PASS | fusion algo v0.3 tuned",
+    "[SYS] field unit #2 | telemetry link stable",
+    "[HW] BOM lock v2.1 | DFM review complete",
+    "[FW] OTA-ready build 1.4.2 | CRC verify OK",
+    "[R&D] prototype #3 | IMU + vitals pipeline live",
+    "[SYS] integration sign-off | monitoring dashboard up",
   ];
   let logIndex = 0;
 
   function tickReadouts() {
-    altM += (Math.random() - 0.5) * 2.4;
-    roll += (Math.random() - 0.5) * 0.32;
-    pitch += (Math.random() - 0.5) * 0.26;
-    yaw = (yaw + (Math.random() - 0.5) * 0.85 + 360) % 360;
-    tMcu += (Math.random() - 0.5) * 0.18;
-    vBatt += (Math.random() - 0.5) * 0.014;
+    hwPcbRev += (Math.random() - 0.5) * 0.04;
+    fwBuild += (Math.random() - 0.5) * 0.06;
+    if (Math.random() > 0.92) rdPrototypes = Math.min(5, Math.max(1, rdPrototypes + (Math.random() > 0.5 ? 1 : -1)));
+    if (Math.random() > 0.96) sysDeployed = Math.min(4, Math.max(1, sysDeployed + (Math.random() > 0.5 ? 1 : -1)));
 
-    altEl.textContent = altM.toFixed(1);
-    attEl.textContent = `${roll.toFixed(1)} / ${pitch.toFixed(1)} / ${yaw.toFixed(1)}`;
-    tempEl.textContent = tMcu.toFixed(1);
-    battEl.textContent = vBatt.toFixed(2);
+    hwEl.textContent = `PCB v${hwPcbRev.toFixed(1)}`;
+    fwEl.textContent = `v${fwBuild.toFixed(2)}`;
+    rdEl.textContent = `${rdPrototypes} active`;
+    sysEl.textContent = `${sysDeployed} deployed`;
   }
 
   function tickLog() {
