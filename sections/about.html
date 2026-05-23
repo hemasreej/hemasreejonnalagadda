@@ -28,85 +28,78 @@
       </div>
     </div>
 
-    <!-- Right side: LabVIEW-inspired career panel (decorative) -->
+    <!-- Right side: technical stack panel -->
     <div class="about-image">
       <div class="about-career-panel" role="region" aria-labelledby="career-panel-heading">
-        <div class="about-career-panel-inner">
-          <div class="career-blocks-side">
-            <h3 id="career-panel-heading" class="career-panel-tag">Technical stack</h3>
-            <div class="career-block-diagram">
-              <div class="career-node career-node--cyan">
-                <span>Platforms</span>
-                <small>
-                  ESP32 • STM32 • RP2040<br />
-                  Raspberry Pi 4 • Arduino
-                </small>
-              </div>
-              <div class="career-wire career-wire--gold" aria-hidden="true"></div>
-              <div class="career-node career-node--green">
-                <span>Firmware</span>
-                <small>
-                  Bare-Metal Development<br />
-                  BSP &amp; HAL Integration<br />
-                  Drivers for GPIO, ADC/DAC,<br />
-                  UART, SPI, I²C, Timers &amp; CAN
-                </small>
-              </div>
-              <div class="career-wire career-wire--purple" aria-hidden="true"></div>
-              <div class="career-node career-node--purple">
-                <span>Domains</span>
-                <small>
-                  Real-Time Signal Processing<br />
-                  Embedded systems &amp; Telemetry<br />
-                  Healthcare Electronics<br />
-                  Aerospace &amp; Defense Systems
-                </small>
-              </div>
-              <div class="career-wire career-wire--orange" aria-hidden="true"></div>
-              <div class="career-node career-node--orange">
-                <span>Toolchain</span>
-                <small>
-                  ESP-IDF • STM32CubeIDE<br />
-                  MATLAB • LTSpice • Proteus<br />
-                  Git • Linux • Hardware Debugging
-                </small>
-              </div>
-            </div>
-            <p class="career-wire-legend">Platforms → firmware → domains → tools I use in the field.</p>
+        <header class="career-panel-header">
+          <h3 id="career-panel-heading" class="career-panel-tag">Technical stack</h3>
+          <p class="career-panel-sub">Platforms → firmware → domains → tools</p>
+        </header>
+
+        <div class="career-flow-glow" aria-hidden="true">
+          <span class="career-flow-line career-flow-line--cyan"></span>
+          <span class="career-flow-line career-flow-line--gold"></span>
+          <span class="career-flow-line career-flow-line--purple"></span>
+          <span class="career-flow-line career-flow-line--orange"></span>
+        </div>
+
+        <div class="career-stack-grid">
+          <article class="career-stack-card career-node--cyan">
+            <h4>Platforms</h4>
+            <ul class="career-chip-list">
+              <li>ESP32</li><li>STM32</li><li>RP2040</li><li>Raspberry Pi 4</li><li>Arduino</li>
+            </ul>
+          </article>
+          <article class="career-stack-card career-node--green">
+            <h4>Firmware</h4>
+            <ul class="career-chip-list">
+              <li>Bare-metal</li><li>BSP &amp; HAL</li><li>GPIO / ADC / DAC</li><li>UART · SPI · I²C</li><li>Timers · CAN</li>
+            </ul>
+          </article>
+          <article class="career-stack-card career-node--purple">
+            <h4>Domains</h4>
+            <ul class="career-chip-list">
+              <li>Signal processing</li><li>Telemetry</li><li>Healthcare electronics</li><li>Aerospace systems</li>
+            </ul>
+          </article>
+          <article class="career-stack-card career-node--orange">
+            <h4>Toolchain</h4>
+            <ul class="career-chip-list">
+              <li>ESP-IDF</li><li>STM32CubeIDE</li><li>MATLAB · LTSpice</li><li>Proteus</li><li>Git · Linux</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="career-metrics-row">
+          <div class="career-metric career-metric--cyan">
+            <span class="career-metric-label">Projects in portfolio</span>
+            <strong class="career-metric-value">10+</strong>
           </div>
-          <div class="career-front-side">
-            <div class="career-gauges">
-              <div class="career-gauge">
-                <span class="career-gauge-label">Projects in portfolio</span>
-                <div class="career-gauge-arc career-gauge-arc--cyan" aria-hidden="true"></div>
-                <strong class="career-gauge-value">10+</strong>
-              </div>
-              <div class="career-gauge">
-                <span class="career-gauge-label">Years building embedded</span>
-                <div class="career-gauge-arc career-gauge-arc--gold" aria-hidden="true"></div>
-                <strong class="career-gauge-value">2+</strong>
-              </div>
-            </div>
-            <div class="career-wave-wrap">
-              <p class="career-wave-title">Momentum — trajectory</p>
-              <div class="career-wave-chart" aria-hidden="true">
-                <svg viewBox="0 0 200 72" preserveAspectRatio="none" class="career-wave-svg">
-                  <defs>
-                    <linearGradient id="careerWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stop-color="#2dd4bf"/>
-                      <stop offset="100%" stop-color="#38bdf8"/>
-                    </linearGradient>
-                  </defs>
-                  <path class="career-wave-grid" d="M0 18h200M0 36h200M0 54h200" fill="none"/>
-                  <path class="career-wave-line" d="M0 48 Q25 58 50 42 T100 36 T150 22 T200 14" fill="none" stroke="url(#careerWaveGrad)" stroke-width="2.2" stroke-linecap="round"/>
-                </svg>
-              </div>
-            </div>
+          <div class="career-metric career-metric--gold">
+            <span class="career-metric-label">Years building embedded</span>
+            <strong class="career-metric-value">2+</strong>
           </div>
         </div>
+
+        <div class="career-wave-wrap">
+          <p class="career-wave-title">Momentum — trajectory</p>
+          <div class="career-wave-chart" aria-hidden="true">
+            <svg viewBox="0 0 200 72" preserveAspectRatio="none" class="career-wave-svg">
+              <defs>
+                <linearGradient id="careerWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#2dd4bf"/>
+                  <stop offset="100%" stop-color="#38bdf8"/>
+                </linearGradient>
+              </defs>
+              <path class="career-wave-grid" d="M0 18h200M0 36h200M0 54h200" fill="none"/>
+              <path class="career-wave-line" d="M0 48 Q25 58 50 42 T100 36 T150 22 T200 14" fill="none" stroke="url(#careerWaveGrad)" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
         <p class="about-career-panel-footer">
           <span>Embedded · Test · Systems</span>
-          <span>Representing the workflow behind the systems I build.</span>
+          <span>Workflow behind the systems I build</span>
         </p>
       </div>
     </div>
