@@ -6,177 +6,181 @@
   <div class="experience-container">
 
     <h2 class="section-title">Experience</h2>
-    <p class="experience-intro">Mission logs from ground systems, healthtech firmware, product deployment, and embedded R&amp;D.</p>
+    <p class="experience-intro">Embedded work across ground systems, healthtech, product engineering, and R&amp;D. Click a role to expand the full technical breakdown.</p>
 
     <div class="timeline">
 
-      <!-- Catalyx — aerospace / ground systems -->
+      <!-- Catalyx -->
       <div class="timeline-item timeline-item--aerospace">
         <div class="timeline-dot" aria-hidden="true"></div>
-        <article class="timeline-content">
-          <span class="exp-category-badge">Mission Systems</span>
-          <div class="exp-impact-strip" aria-label="Impact highlights">
-            <span class="exp-impact">Ground-Station Tracking</span>
-            <span class="exp-impact">Dual-Axis Motion</span>
-            <span class="exp-impact">Propulsion DAQ</span>
-            <span class="exp-impact">Multi-Camera Imaging</span>
-            <span class="exp-impact">H.264 Streaming</span>
-          </div>
+        <article class="timeline-content" data-exp-card>
+          <span class="exp-category-badge">Space</span>
           <h3 class="exp-role">Embedded &amp; Ground Station Engineer</h3>
           <h4 class="exp-company">Catalyx Space, Gujarat</h4>
           <p class="exp-duration">November 2025 – Present</p>
 
-          <div class="exp-mission-block exp-mission-block--current">
-            <p class="exp-mission-lead">
-              Designing real-time ground-station tracking systems with non-blocking motion control
-              and embedded trajectory management.
-            </p>
-            <p class="exp-depth-label">Mission depth</p>
-            <ul class="exp-details exp-details--depth">
-              <li>Designed a modular dual-axis ground-station tracking architecture using layered embedded firmware principles.</li>
-              <li>Developed velocity-limited azimuth tracking logic for smooth continuous antenna motion and trajectory control.</li>
-              <li>Engineered non-blocking RP2040 PIO-based stepper pulse generation for real-time motion execution.</li>
-              <li>Implemented degree-to-pulse conversion, RPM-based velocity control, and fractional pulse accumulation for high-resolution tracking.</li>
-              <li>Built scalable tracking-control abstractions separating hardware drivers, motion systems, and trajectory management layers.</li>
-              <li>Defined SRR-oriented system architecture covering ACU autonomy, safety logic, RF coordination, and operational control boundaries.</li>
-            </ul>
-            <div class="exp-tech-tags" aria-label="Tracking technologies">
-              <span>RP2040</span><span>Pico SDK</span><span>PIO</span><span>Stepper Control</span><span>Motion Planning</span><span>Real-Time Systems</span><span>Ground Station</span>
+          <div class="exp-card-preview">
+            <div class="exp-mission-block">
+              <p class="exp-mission-block-title">Ground-station tracking</p>
+              <p class="exp-mission-lead">Designing real-time antenna tracking systems with smooth motion control and continuous position tracking.</p>
+              <div class="exp-system-stack"><p>RP2040 • Pico SDK • PIO • Stepper Control • Motion Planning • Real-Time Systems • Ground Station • SRR Architecture</p></div>
             </div>
-            <div class="exp-system-stack">
-              <span class="exp-stack-label">System Stack</span>
-              <p>RP2040 • Pico SDK • PIO • Stepper Control • Motion Planning • Real-Time Systems • Ground Station • SRR Architecture</p>
+            <div class="exp-mission-block">
+              <p class="exp-mission-block-title">Propulsion telemetry</p>
+              <p class="exp-mission-lead">Developed high-speed telemetry and sensor acquisition systems for propulsion test instrumentation.</p>
+              <div class="exp-system-stack"><p>RP2040 • LabVIEW • USB CDC • DAQ • Telemetry • TDMS • Binary Protocols • Producer–Consumer Architecture</p></div>
+            </div>
+            <div class="exp-mission-block">
+              <p class="exp-mission-block-title">Imaging &amp; streaming</p>
+              <p class="exp-mission-lead">Built multi-camera imaging and video-streaming systems for real-time monitoring applications.</p>
+              <div class="exp-system-stack"><p>C++ • OpenCV • GStreamer • Embedded Linux • Raspberry Pi • V4L2 • Multithreading</p></div>
             </div>
           </div>
 
-          <div class="exp-mission-block">
-            <p class="exp-mission-block-title">Propulsion telemetry</p>
-            <p class="exp-mission-lead">
-              Building real-time propulsion telemetry, embedded acquisition systems, and
-              mission-support infrastructure.
-            </p>
-            <p class="exp-depth-label">Mission depth</p>
-            <ul class="exp-details exp-details--depth">
-              <li>Developed real-time DAQ and telemetry for rocket propulsion ground testing using RP2040 and LabVIEW.</li>
-              <li>Engineered USB CDC stream reconstruction and binary frame extraction for reliable high-speed acquisition under fragmented data.</li>
-              <li>Designed multi-channel pipelines for pressure transducers, load cells, and propulsion instrumentation systems.</li>
-              <li>Implemented producer–consumer telemetry with live visualization, TDMS/CSV logging, and engineering-unit conversion.</li>
-              <li>Built deterministic frame parsing and synchronization for stable streaming and post-test propulsion analysis.</li>
-            </ul>
-            <div class="exp-tech-tags" aria-label="Propulsion technologies">
-              <span>RP2040</span><span>LabVIEW</span><span>USB CDC</span><span>DAQ</span><span>Telemetry</span><span>TDMS</span><span>Binary Protocols</span>
+          <button type="button" class="exp-card-toggle" aria-expanded="false" aria-controls="exp-depth-catalyx">
+            <span class="exp-card-toggle-label">View full details</span>
+            <span class="exp-card-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div id="exp-depth-catalyx" class="exp-card-depth" hidden>
+            <p class="exp-depth-label">Detailed breakdown</p>
+            <div class="exp-mission-block">
+              <p class="exp-area-label">Ground-station tracking</p>
+              <ul class="exp-details exp-details--depth">
+                <li>Designed a modular dual-axis ground-station tracking architecture using layered embedded firmware principles.</li>
+                <li>Developed velocity-limited azimuth tracking logic for smooth continuous antenna motion and trajectory control.</li>
+                <li>Engineered non-blocking RP2040 PIO-based stepper pulse generation for real-time motion execution.</li>
+                <li>Implemented degree-to-pulse conversion, RPM-based velocity control, and fractional pulse accumulation for high-resolution tracking.</li>
+                <li>Built scalable tracking-control abstractions separating hardware drivers, motion systems, and trajectory management layers.</li>
+                <li>Defined SRR-oriented system architecture covering ACU autonomy, safety logic, RF coordination, and operational control boundaries.</li>
+              </ul>
             </div>
-            <div class="exp-system-stack">
-              <span class="exp-stack-label">System Stack</span>
-              <p>RP2040 • LabVIEW • USB CDC • DAQ • Telemetry • TDMS • Binary Protocols • Producer–Consumer Architecture</p>
+            <div class="exp-mission-block">
+              <p class="exp-area-label">Propulsion telemetry</p>
+              <ul class="exp-details exp-details--depth">
+                <li>Developed real-time DAQ and telemetry for rocket propulsion ground testing using RP2040 and LabVIEW.</li>
+                <li>Engineered USB CDC stream reconstruction and binary frame extraction for reliable high-speed acquisition under fragmented data.</li>
+                <li>Designed multi-channel pipelines for pressure transducers, load cells, and propulsion instrumentation systems.</li>
+                <li>Implemented producer–consumer telemetry with live visualization, TDMS/CSV logging, and engineering-unit conversion.</li>
+                <li>Built deterministic frame parsing and synchronization for stable streaming and post-test propulsion analysis.</li>
+              </ul>
             </div>
-          </div>
-
-          <div class="exp-mission-block">
-            <p class="exp-mission-block-title">Imaging &amp; streaming</p>
-            <p class="exp-mission-lead">
-              Built modular multi-camera imaging and low-latency video streaming systems for
-              embedded mission-support platforms.
-            </p>
-            <p class="exp-depth-label">Mission depth</p>
-            <ul class="exp-details exp-details--depth">
-              <li>Developed modular multi-camera imaging pipelines using C++, OpenCV, and GStreamer.</li>
-              <li>Built low-latency H.264 streaming workflows optimized for embedded Linux systems.</li>
-              <li>Implemented asynchronous multi-camera capture with thread-safe processing architecture.</li>
-              <li>Designed camera management, logging, and recovery for long-running deployments.</li>
-              <li>Debugged and optimized V4L2/GStreamer pipelines for sync and real-time performance.</li>
-            </ul>
-            <div class="exp-tech-tags" aria-label="Imaging technologies">
-              <span>C++</span><span>OpenCV</span><span>GStreamer</span><span>Embedded Linux</span><span>Raspberry Pi</span><span>V4L2</span><span>Multithreading</span>
-            </div>
-            <div class="exp-system-stack">
-              <span class="exp-stack-label">System Stack</span>
-              <p>C++ • OpenCV • GStreamer • Embedded Linux • Raspberry Pi • V4L2 • Multithreading</p>
+            <div class="exp-mission-block">
+              <p class="exp-area-label">Imaging &amp; streaming</p>
+              <ul class="exp-details exp-details--depth">
+                <li>Developed modular multi-camera imaging pipelines using C++, OpenCV, and GStreamer.</li>
+                <li>Built low-latency H.264 streaming workflows optimized for embedded Linux systems.</li>
+                <li>Implemented asynchronous multi-camera capture with thread-safe processing architecture.</li>
+                <li>Designed camera management, logging, and recovery for long-running deployments.</li>
+                <li>Debugged and optimized V4L2/GStreamer pipelines for sync and real-time performance.</li>
+              </ul>
             </div>
           </div>
         </article>
       </div>
 
-      <!-- Geminex — healthtech -->
+      <!-- Geminex -->
       <div class="timeline-item timeline-item--health">
         <div class="timeline-dot" aria-hidden="true"></div>
-        <article class="timeline-content">
+        <article class="timeline-content" data-exp-card>
           <span class="exp-category-badge">HealthTech</span>
-          <div class="exp-impact-strip" aria-label="Impact highlights">
-            <span class="exp-impact">4+ Sensors Integrated</span>
-            <span class="exp-impact">Real-Time Acquisition</span>
-            <span class="exp-impact">Biomedical Signals</span>
-          </div>
           <h3 class="exp-role">Freelance Firmware Engineer</h3>
           <h4 class="exp-company">Geminex Technologies, Gujarat</h4>
           <p class="exp-duration">June 2025 – August 2025</p>
-          <ul class="exp-details">
-            <li>Shipped firmware for a digital stethoscope on ESP32-S3 with ESP-IDF.</li>
-            <li>Integrated ECG, SpO₂, temperature, and mic paths for physiological monitoring.</li>
-            <li>Implemented ADC acquisition with live serial waveform visualization.</li>
-          </ul>
-          <div class="exp-tech-tags" aria-label="Technologies">
-            <span>Physiological Monitoring</span><span>Biomedical Signals</span><span>ADC Pipelines</span><span>ESP-IDF</span>
+
+          <div class="exp-card-preview">
+            <div class="exp-mission-summary">
+              <p>Built a portable digital stethoscope system for real-time biomedical signal monitoring and healthcare telemetry.</p>
+              <p>Developed embedded firmware for ECG acquisition, acoustic sensing, SpO₂ monitoring, and physiological data visualization.</p>
+              <p>Integrated BLE communication, signal filtering, and multi-sensor processing for continuous real-time monitoring.</p>
+            </div>
+            <div class="exp-system-stack"><p>ESP32 • ESP-IDF • ECG Acquisition • BLE Telemetry • Signal Processing • OLED UI • I²C • ADC</p></div>
           </div>
-          <div class="exp-system-stack">
-            <span class="exp-stack-label">System Stack</span>
-            <p>ESP32-S3 • ESP-IDF • I²C • ADC • UART • Signal Processing • OLED</p>
+
+          <button type="button" class="exp-card-toggle" aria-expanded="false" aria-controls="exp-depth-geminex">
+            <span class="exp-card-toggle-label">View full details</span>
+            <span class="exp-card-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div id="exp-depth-geminex" class="exp-card-depth" hidden>
+            <p class="exp-depth-label">Detailed breakdown</p>
+            <ul class="exp-details exp-details--depth">
+              <li>Built ADC pipelines for ECG and acoustic capture with live waveform display and on-device filtering.</li>
+              <li>Synchronized ECG, SpO₂, temperature, and microphone paths with stable I²C polling on ESP32.</li>
+              <li>Shipped BLE telemetry and an OLED vitals UI for wireless monitoring during bench and field use.</li>
+              <li>Applied biomedical signal conditioning—baseline correction, smoothing, and noise reduction—on acquired vitals.</li>
+              <li>Integrated Li-Po charging and regulated sensor power; resolved ADC drift and sync issues under continuous acquisition.</li>
+              <li>Structured modular firmware so new sensors and serial plotting workflows could be added without rework.</li>
+            </ul>
           </div>
         </article>
       </div>
 
-      <!-- INVUI — product engineering -->
+      <!-- INVUI -->
       <div class="timeline-item timeline-item--product">
         <div class="timeline-dot" aria-hidden="true"></div>
-        <article class="timeline-content">
-          <span class="exp-category-badge">Real-Time Systems</span>
-          <div class="exp-impact-strip" aria-label="Impact highlights">
-            <span class="exp-impact">Wireless Sensing</span>
-            <span class="exp-impact">Field Calibration</span>
-            <span class="exp-impact">Live Alerts</span>
-          </div>
+        <article class="timeline-content" data-exp-card>
+          <span class="exp-category-badge">HealthTech</span>
           <h3 class="exp-role">Embedded Engineer</h3>
           <h4 class="exp-company">INVIU Systems LLP, Hyderabad</h4>
           <p class="exp-duration">January 2025 – June 2025</p>
-          <ul class="exp-details">
-            <li>Developed firmware for a wireless saline-level embedded monitoring system on ESP32-S3.</li>
-            <li>Integrated capacitive level sensing with Wi-Fi for real-time field alerts.</li>
-            <li>Led hardware assembly, circuit validation, and sensor calibration.</li>
-          </ul>
-          <div class="exp-tech-tags" aria-label="Technologies">
-            <span>Product Deployment</span><span>Field Monitoring</span><span>Calibration</span><span>Wireless Sensing</span>
+
+          <div class="exp-card-preview">
+            <div class="exp-mission-summary">
+              <p>Developed a real-time IV fluid monitoring prototype to track infusion levels and improve patient monitoring workflows.</p>
+              <p>Integrated sensor hardware, wireless status updates, and mobile-based indication for fluid-level changes.</p>
+              <p>Contributed to enclosure prototyping, bench testing, and iterative validation in healthcare environments.</p>
+            </div>
+            <div class="exp-system-stack"><p>ESP32 • Embedded Monitoring • Sensor Systems • Wireless Telemetry • Prototype Validation • Hardware Integration</p></div>
           </div>
-          <div class="exp-system-stack">
-            <span class="exp-stack-label">System Stack</span>
-            <p>ESP32-S3 • Capacitive Sensing • Wi-Fi • GPIO • Firmware Bring-Up • Hardware Debug</p>
+
+          <button type="button" class="exp-card-toggle" aria-expanded="false" aria-controls="exp-depth-invui">
+            <span class="exp-card-toggle-label">View full details</span>
+            <span class="exp-card-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div id="exp-depth-invui" class="exp-card-depth" hidden>
+            <p class="exp-depth-label">Detailed breakdown</p>
+            <ul class="exp-details exp-details--depth">
+              <li>Built fluid-level sensing, wireless communication, and live monitoring flows for hospital IV-fluid tracking.</li>
+              <li>Assembled prototypes, brought up sensors on ESP32, and integrated hardware for continuous infusion-level reads.</li>
+              <li>Refined enclosures and system behavior through hospital tests, usability feedback, and field observations.</li>
+              <li>Validated parts and end-to-end integration across multiple prototype revisions.</li>
+              <li>Connected mobile alerting so fluid-status updates could be viewed remotely.</li>
+              <li>Debugged sensing and wireless issues during field trials and supported test documentation through the product cycle.</li>
+            </ul>
           </div>
         </article>
       </div>
 
-      <!-- IIT Indore — R&D -->
+      <!-- IIT Indore -->
       <div class="timeline-item timeline-item--research">
         <div class="timeline-dot" aria-hidden="true"></div>
-        <article class="timeline-content">
+        <article class="timeline-content" data-exp-card>
           <span class="exp-category-badge">Embedded R&amp;D</span>
-          <div class="exp-impact-strip" aria-label="Impact highlights">
-            <span class="exp-impact">Signal Fusion</span>
-            <span class="exp-impact">Motion Analysis</span>
-            <span class="exp-impact">Embedded AI Testing</span>
-          </div>
           <h3 class="exp-role">Embedded R&amp;D Engineer (Drishti CPS Fellow)</h3>
           <h4 class="exp-company">IIT Indore</h4>
           <p class="exp-duration">October 2023 – December 2024 · Research Fellowship</p>
-          <ul class="exp-details">
-            <li>Built a gait-assessment wearable with ESP32-S3 and BNO055 IMU sensing.</li>
-            <li>Implemented I²C bring-up, Wi-Fi telemetry, and on-device signal fusion.</li>
-            <li>Ran deep-learning motion experiments for rehabilitation-oriented analysis.</li>
-          </ul>
-          <div class="exp-tech-tags" aria-label="Technologies">
-            <span>Experimentation</span><span>IMU Fusion</span><span>Motion Analysis</span><span>Embedded AI</span>
+
+          <div class="exp-card-preview">
+            <div class="exp-mission-summary">
+              <p>Developed a wearable gait-analysis and rehabilitation-assistance system for abnormal gait detection and movement assessment.</p>
+              <p>Integrated Kinect-based motion tracking with IMU sensor acquisition for real-time gait and posture analysis.</p>
+              <p>Worked on motion-data processing, live monitoring, and rehabilitation-support workflows for therapy and gait evaluation.</p>
+            </div>
+            <div class="exp-system-stack"><p>Motion Capture • IMU Fusion • Gait Monitoring • Skeletal Tracking • Rehabilitation Systems</p></div>
           </div>
-          <div class="exp-system-stack">
-            <span class="exp-stack-label">System Stack</span>
-            <p>ESP32-S3 • BNO055 • I²C • Wi-Fi • Signal Fusion • Python · ML Pipelines</p>
+
+          <button type="button" class="exp-card-toggle" aria-expanded="false" aria-controls="exp-depth-iit">
+            <span class="exp-card-toggle-label">View full details</span>
+            <span class="exp-card-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <div id="exp-depth-iit" class="exp-card-depth" hidden>
+            <p class="exp-depth-label">Detailed breakdown</p>
+            <ul class="exp-details exp-details--depth">
+              <li>Built a wearable gait-analysis platform with ESP32-S3 and BNO055 for movement assessment and abnormal-gait detection.</li>
+              <li>Combined Kinect skeletal tracking with IMU streams to compare body pose and inertial gait features in real time.</li>
+              <li>Developed motion-data processing and live monitoring flows for therapy sessions and clinical gait evaluation.</li>
+              <li>Implemented I²C bring-up, Wi-Fi telemetry, and signal-fusion logic across vision and inertial sensor paths.</li>
+              <li>Ran deep-learning experiments on acquired motion data for rehabilitation-support and classification workflows.</li>
+            </ul>
           </div>
         </article>
       </div>

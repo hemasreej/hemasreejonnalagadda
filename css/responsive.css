@@ -261,11 +261,6 @@
     height: 200px;
   }
 
-  .intro-gate-controls {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .projects-grid {
     gap: 16px;
   }

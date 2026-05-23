@@ -920,62 +920,6 @@ h3 { font-size: 1.5rem; }
   }
 }
 
-/* Full-screen intro gate */
-.intro-gate {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.3), rgba(1, 4, 12, 0.96));
-  transition: opacity 0.45s ease, visibility 0.45s ease;
-}
-
-.intro-gate.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.intro-gate-card {
-  width: min(980px, 92vw);
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  box-shadow: 0 30px 70px rgba(2, 8, 20, 0.7);
-  background: #020817;
-}
-
-.intro-video {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-  background: linear-gradient(145deg, #061124, #020617);
-}
-
-.intro-gate-controls {
-  padding: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.intro-gate-note {
-  color: #94a3b8;
-  font-size: 0.84rem;
-}
-
-.intro-gate-enter {
-  border: 1px solid rgba(250, 204, 21, 0.75);
-  background: linear-gradient(135deg, #facc15, #fde047);
-  color: #0f172a;
-  font-weight: 700;
-  border-radius: 10px;
-  padding: 10px 16px;
-  cursor: pointer;
-}
 .about-section {
   display: flex;
   justify-content: center;
@@ -1014,6 +958,38 @@ h3 { font-size: 1.5rem; }
   flex: 1;
   display: flex;
   justify-content: center;
+}
+
+.home-reel-section {
+  display: flex;
+  justify-content: center;
+  padding: 48px 24px 64px;
+  background: var(--section-surface);
+}
+
+.home-reel-inner {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-video-panel {
+  width: 100%;
+  max-width: 960px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 20px 50px rgba(2, 8, 20, 0.55);
+  background: #020817;
+}
+
+.about-intro-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(145deg, #061124, #020617);
 }
 
 /* LabVIEW-inspired career instrument (About section) */
@@ -1362,6 +1338,16 @@ h3 { font-size: 1.5rem; }
   --exp-glow: rgba(251, 191, 36, 0.45);
 }
 
+.timeline-item--silver {
+  --exp-accent: #cbd5e1;
+  --exp-accent-soft: rgba(148, 163, 184, 0.16);
+  --exp-glow: rgba(203, 213, 225, 0.4);
+}
+
+.timeline-item--silver .exp-role {
+  color: #f1f5f9;
+}
+
 .timeline-item--research {
   --exp-accent: #a78bfa;
   --exp-accent-soft: rgba(167, 139, 250, 0.14);
@@ -1526,12 +1512,21 @@ h3 { font-size: 1.5rem; }
 }
 
 .exp-depth-label {
-  margin: 0 0 8px;
+  margin: 0 0 14px;
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--exp-accent, var(--accent-gold));
+}
+
+.exp-area-label {
+  margin: 0 0 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.9);
 }
 
 .exp-details {
@@ -1623,6 +1618,152 @@ h3 { font-size: 1.5rem; }
 
 .timeline-content:hover .exp-system-stack p {
   color: #e2e8f0;
+}
+
+.exp-card-preview {
+  margin-top: 4px;
+}
+
+.exp-card-preview .exp-mission-block {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+}
+
+.exp-card-preview .exp-mission-block:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.exp-card-preview .exp-tech-tags {
+  margin-bottom: 10px;
+}
+
+.exp-card-preview .exp-mission-lead {
+  margin-bottom: 12px;
+}
+
+.exp-mission-summary {
+  margin: 0 0 14px;
+  padding: 14px 16px 12px;
+  border-radius: 10px;
+  background: var(--exp-accent-soft, rgba(52, 211, 153, 0.1));
+  border-left: 3px solid var(--exp-accent, #34d399);
+}
+
+.exp-mission-summary p {
+  position: relative;
+  margin: 0 0 12px;
+  padding-left: 14px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #e2e8f0;
+}
+
+.exp-mission-summary p::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--exp-accent, #34d399);
+  box-shadow: 0 0 8px var(--exp-accent, #34d399);
+}
+
+.exp-mission-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-content:hover .exp-mission-summary p {
+  color: #f1f5f9;
+}
+
+.exp-card-toggle {
+  width: 100%;
+  margin-top: 18px;
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--exp-accent, var(--accent-gold)) 45%, transparent);
+  background: var(--exp-accent-soft, rgba(255, 215, 0, 0.08));
+  color: var(--exp-accent, var(--accent-gold));
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.exp-card-toggle:hover {
+  background: color-mix(in srgb, var(--exp-accent, var(--accent-gold)) 18%, transparent);
+  color: #f8fafc;
+}
+
+.exp-card-toggle-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.exp-card-toggle-icon::before {
+  content: '▾';
+}
+
+.timeline-content.is-expanded .exp-card-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.exp-card-depth {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.exp-card-depth[hidden] {
+  display: none;
+}
+
+.timeline-content.is-expanded .exp-card-depth:not([hidden]) {
+  animation: expDepthIn 0.32s ease-out;
+}
+
+@keyframes expDepthIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.exp-card-depth .exp-mission-block {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+}
+
+.exp-card-depth .exp-mission-block:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 /* =========================

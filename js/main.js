@@ -37,8 +37,31 @@ async function loadSections() {
   initTiltCards();
   initTelemetryValues();
   initSignalChainCard();
+  initExperienceCards();
   initSubmitTracking();
   initSubmissionNotice();
+}
+
+function initExperienceCards() {
+  document.querySelectorAll("[data-exp-card]").forEach((card) => {
+    const toggle = card.querySelector(".exp-card-toggle");
+    const panel = card.querySelector(".exp-card-depth");
+    const label = card.querySelector(".exp-card-toggle-label");
+    if (!toggle || !panel) return;
+
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      const nextOpen = !isOpen;
+
+      toggle.setAttribute("aria-expanded", String(nextOpen));
+      panel.hidden = !nextOpen;
+      card.classList.toggle("is-expanded", nextOpen);
+
+      if (label) {
+        label.textContent = nextOpen ? "Hide details" : "View full details";
+      }
+    });
+  });
 }
 
 function initNavState() {
@@ -96,46 +119,9 @@ function initInteractiveBackground() {
   mountSpaceBackground(bg);
 }
 
-function initIntroGate() {
-  if (!document.body || window.location.pathname.split("/").pop() !== "index.html" && window.location.pathname.split("/").pop() !== "") return;
-
-  const gate = document.createElement("div");
-  gate.className = "intro-gate";
-  gate.innerHTML = `
-    <div class="intro-gate-card">
-      <video class="intro-video" muted loop playsinline preload="none" poster="assets/images/intro-video-cover.jpg">
-        <source src="assets/videos/intro-reel.mp4" type="video/mp4" />
-      </video>
-      <div class="intro-gate-controls">
-        <p class="intro-gate-note">Avionics / embedded systems reel — replace with your footage: <strong>assets/videos/intro-reel.mp4</strong></p>
-        <button class="intro-gate-enter" type="button">Initialize Avionics Console</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(gate);
-
-  const enterBtn = gate.querySelector(".intro-gate-enter");
-  const introVideo = gate.querySelector(".intro-video");
-  if (enterBtn) {
-    enterBtn.addEventListener("click", () => {
-      if (typeof window.schedulePortfolioHeavyBg === "function") {
-        window.schedulePortfolioHeavyBg();
-      }
-      gate.classList.add("hidden");
-      window.setTimeout(() => gate.remove(), 480);
-    });
-  }
-  if (introVideo) {
-    introVideo.addEventListener("mouseenter", () => {
-      introVideo.preload = "auto";
-      introVideo.play().catch(() => {});
-    }, { once: true });
-  }
-}
-
 function initScrollReveal() {
   const revealTargets = document.querySelectorAll(
-    ".timeline-item, .edu-item, .project-card, .achievement-card, .journey-card, .gallery-item"
+    ".timeline-item, .edu-item, .project-card, .achievement-card, .gallery-item"
   );
 
   if (!revealTargets.length) return;
@@ -159,7 +145,7 @@ function initScrollReveal() {
 }
 
 function initTiltCards() {
-  const tiltCards = document.querySelectorAll(".project-card, .achievement-card, .journey-card");
+  const tiltCards = document.querySelectorAll(".project-card, .achievement-card");
   tiltCards.forEach((card) => {
     card.addEventListener("mousemove", (event) => {
       const rect = card.getBoundingClientRect();
@@ -285,6 +271,5 @@ function initSubmitTracking() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadSections();
-  initIntroGate();
   requestAnimationFrame(() => initInteractiveBackground());
 });
