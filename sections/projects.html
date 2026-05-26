@@ -159,13 +159,12 @@
         <div class="project-info">
           <h3>Lunar Hazard Mapping — Safety in Terrain Navigation</h3>
           <p>
-            Built a terrain-analysis pipeline to identify surface hazards and support
-            safer navigation paths over lunar-style elevation data — combining
-            geospatial preprocessing, hazard scoring, and route-safety evaluation for
-            robotics and exploration scenarios.
+            Built a lunar surface analysis system using deep learning, crater-dimension
+            estimation, and hazard scoring to improve terrain understanding and navigation
+            safety.
           </p>
           <div class="project-tags">
-            <span>Python</span><span>Terrain Analysis</span><span>Hazard Detection</span><span>Navigation Safety</span>
+            <span>Python</span><span>TensorFlow</span><span>CLAHE</span><span>MATLAB</span><span>Terrain Mapping</span>
           </div>
           <div class="project-links">
             <a href="#" target="_blank" rel="noopener" class="btn btn-glaze-purple">GitHub</a>
@@ -176,19 +175,22 @@
 
       <!-- Project 7 -->
       <div class="project-card">
-        <div class="project-card-visual project-card-visual--analytics" aria-hidden="true">
-          <span class="project-card-visual-label">ML · booking analytics</span>
-        </div>
+        <img
+          class="project-card-photo project-card-photo--terrain"
+          src="assets/images/hotel_cancellation.png?v=1"
+          alt="Hotel reservation cancellation prediction — analytics and model decision flow"
+          loading="lazy"
+          decoding="async"
+        >
         <div class="project-info">
           <h3>Hotel Reservation Cancellation Prediction</h3>
           <p>
-            Developed a predictive model to estimate hotel booking cancellation
-            likelihood from reservation and customer features — with exploratory
-            data analysis, feature engineering, and classifier evaluation for
-            operational decision support.
+            Helps hotels reduce revenue loss by flagging high-risk cancellations early.
+            Built an ML pipeline on 42,000+ bookings with feature engineering and EDA;
+            XGBoost performed best at ~82% accuracy and 0.81 AUC.
           </p>
           <div class="project-tags">
-            <span>Python</span><span>Machine Learning</span><span>EDA</span><span>Classification</span>
+            <span>Python</span><span>XGBoost</span><span>Scikit-learn</span><span>Binary Classification</span><span>EDA &amp; Feature Engineering</span>
           </div>
           <div class="project-links">
             <a href="#" target="_blank" rel="noopener" class="btn btn-glaze-purple">GitHub</a>
@@ -199,18 +201,57 @@
 
       <!-- Project 8 -->
       <div class="project-card">
-        <div class="project-card-visual project-card-visual--underwater" aria-hidden="true">
-          <span class="project-card-visual-label">Computer vision · image restoration</span>
+        <div class="project-card-underwater-pair" aria-label="Underwater image enhancement before and after">
+          <img
+            src="assets/images/underwater_before.png?v=1"
+            alt="Underwater image before enhancement"
+            loading="lazy"
+            decoding="async"
+          >
+          <img
+            src="assets/images/underwater_after.png?v=1"
+            alt="Underwater image after enhancement"
+            loading="lazy"
+            decoding="async"
+          >
         </div>
         <div class="project-info">
           <h3>Underwater Image Enhancement</h3>
           <p>
-            Implemented an image-restoration pipeline to improve visibility in
-            underwater captures — reducing color cast and haze, recovering contrast,
-            and sharpening scene detail for inspection and marine imaging workflows.
+            Underwater images suffer from severe colour distortion, backscatter, and
+            light attenuation that make standard enhancement methods ineffective.
+            Built a hybrid deep learning model combining patchwise processing,
+            dynamic fusion, and contrastive learning to restore underwater image clarity.
           </p>
           <div class="project-tags">
-            <span>Python</span><span>Computer Vision</span><span>Image Processing</span><span>Deep Learning</span>
+            <span>Deep Learning</span><span>Sea Thru</span><span>CLAHE</span><span>CNN</span><span>Encoder-Decoder</span>
+          </div>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener" class="btn btn-glaze-purple">GitHub</a>
+            <a href="#" class="btn btn-glaze-silver">Details</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 9 -->
+      <div class="project-card">
+        <img
+          class="project-card-photo project-card-photo--yoga"
+          src="assets/images/yoga_mentor.png?v=3"
+          alt="Yoga Mentor app interface with real-time pose guidance"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="project-info">
+          <h3>Yoga Mentor using TensorFlow and MoveNet</h3>
+          <p>
+            Built a webcam-based yoga posture analysis platform to help users practice
+            at home with real-time pose correction and movement feedback. Classified
+            poses, validated posture accuracy, and tracked user performance through
+            live skeletal analysis.
+          </p>
+          <div class="project-tags">
+            <span>MoveNet</span><span>Pose Estimation</span><span>TensorFlow.js</span><span>ReactJS</span><span>Computer Vision</span>
           </div>
           <div class="project-links">
             <a href="#" target="_blank" rel="noopener" class="btn btn-glaze-purple">GitHub</a>
