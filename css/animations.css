@@ -221,15 +221,7 @@ textarea,
   }
 }
 
-/* Subtle background animation */
-body {
-  animation: subtle-float 20s ease-in-out infinite;
-}
-
-@keyframes subtle-float {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.02); }
-}
+/* Removed body filter animation — it repainted the whole page every frame */
 
 /* Scroll reveal animation helper */
 .scroll-reveal {

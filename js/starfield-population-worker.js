@@ -1,11 +1,21 @@
 /* Builds WebGL star buffers off the main thread. */
 const STRIDE = 12;
 
-function starCounts(width, height) {
+function starCounts(width, height, lite) {
   const area = width * height;
-  const dustCount = Math.min(1400, Math.max(500, Math.floor(area / 520)));
-  const mainCount = Math.min(420, Math.max(160, Math.floor(area / 1800)));
-  return { dustCount, mainCount };
+  let scale = 1;
+  if (lite) scale = 0.32;
+  else if (width < 1024) scale = 0.55;
+  const dustCount = Math.floor(
+    Math.min(1400, Math.max(500, Math.floor(area / 520))) * scale
+  );
+  const mainCount = Math.floor(
+    Math.min(420, Math.max(160, Math.floor(area / 1800))) * scale
+  );
+  return {
+    dustCount: Math.max(lite ? 120 : 280, dustCount),
+    mainCount: Math.max(lite ? 40 : 80, mainCount),
+  };
 }
 
 function pushStar(data, offset, star) {
@@ -25,8 +35,8 @@ function pushStar(data, offset, star) {
   return i;
 }
 
-function buildPopulation(width, height) {
-  const { dustCount, mainCount } = starCounts(width, height);
+function buildPopulation(width, height, lite) {
+  const { dustCount, mainCount } = starCounts(width, height, lite);
   const total = dustCount + mainCount;
   const data = new Float32Array(total * STRIDE);
   let offset = 0;
@@ -77,8 +87,8 @@ function buildPopulation(width, height) {
 }
 
 self.onmessage = (event) => {
-  const { width, height } = event.data || {};
+  const { width, height, lite } = event.data || {};
   if (!width || !height) return;
-  const packed = buildPopulation(width, height);
+  const packed = buildPopulation(width, height, !!lite);
   self.postMessage(packed, [packed.data.buffer]);
 };

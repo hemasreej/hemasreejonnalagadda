@@ -40,6 +40,7 @@ async function loadSections() {
   initExperienceCards();
   initSubmitTracking();
   initSubmissionNotice();
+  scheduleBackgroundInit();
 }
 
 function initExperienceCards() {
@@ -84,6 +85,8 @@ function initScrollSpy() {
 
   if (!sections.length || !anchorLinks.length) return;
 
+  let ticking = false;
+
   function updateActiveLink() {
     const scrollPosition = window.scrollY + headerHeight + 40;
 
@@ -96,9 +99,16 @@ function initScrollSpy() {
         link.classList.toggle("active", link.getAttribute("href") === `#${section.id}` && isActive);
       });
     });
+    ticking = false;
   }
 
-  window.addEventListener("scroll", updateActiveLink);
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateActiveLink);
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
   updateActiveLink();
 }
 
@@ -117,6 +127,15 @@ function initInteractiveBackground() {
   }
 
   mountSpaceBackground(bg);
+}
+
+function scheduleBackgroundInit() {
+  const start = () => initInteractiveBackground();
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(start, { timeout: 3000 });
+    return;
+  }
+  window.setTimeout(start, 600);
 }
 
 function initScrollReveal() {
@@ -145,6 +164,8 @@ function initScrollReveal() {
 }
 
 function initTiltCards() {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
   const tiltCards = document.querySelectorAll(".project-card, .achievement-card");
   tiltCards.forEach((card) => {
     card.addEventListener("mousemove", (event) => {
@@ -164,16 +185,38 @@ function initTiltCards() {
 
 function initTelemetryValues() {
   const telemetryValues = document.querySelectorAll("[data-telemetry]");
+  if (!telemetryValues.length) return;
+
+  const intervals = [];
+
   telemetryValues.forEach((valueNode) => {
     const baseValue = Number.parseFloat(valueNode.getAttribute("data-telemetry")) || 0;
     const digits = Number.parseInt(valueNode.getAttribute("data-digits") || "2", 10);
 
-    setInterval(() => {
-      const noise = (Math.random() - 0.5) * 0.06 * Math.max(baseValue, 1);
-      const next = Math.max(0, baseValue + noise);
-      valueNode.textContent = next.toFixed(digits);
-    }, 1500);
+    intervals.push(
+      window.setInterval(() => {
+        const noise = (Math.random() - 0.5) * 0.06 * Math.max(baseValue, 1);
+        const next = Math.max(0, baseValue + noise);
+        valueNode.textContent = next.toFixed(digits);
+      }, 1500)
+    );
   });
+
+  const hero = document.querySelector(".hero-section");
+  if (!hero || !intervals.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries.some((entry) => entry.isIntersecting);
+      if (!visible) {
+        intervals.forEach((id) => window.clearInterval(id));
+        intervals.length = 0;
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.05 }
+  );
+  observer.observe(hero);
 }
 
 function initSignalChainCard() {
@@ -191,6 +234,8 @@ function initSignalChainCard() {
   let fwBuild = 1.42;
   let rdPrototypes = 3;
   let sysDeployed = 2;
+  let readoutTimer = 0;
+  let logTimer = 0;
 
   const logTemplates = [
     "[HW] PCB bring-up OK | sensor rail 3V3 stable",
@@ -226,10 +271,32 @@ function initSignalChainCard() {
     logEl.textContent = lines.slice(0, 5).join("\n");
   }
 
-  tickReadouts();
-  tickLog();
-  window.setInterval(tickReadouts, 1100);
-  window.setInterval(tickLog, 2300);
+  function startTimers() {
+    if (readoutTimer) return;
+    tickReadouts();
+    tickLog();
+    readoutTimer = window.setInterval(tickReadouts, 1100);
+    logTimer = window.setInterval(tickLog, 2300);
+  }
+
+  function stopTimers() {
+    window.clearInterval(readoutTimer);
+    window.clearInterval(logTimer);
+    readoutTimer = 0;
+    logTimer = 0;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        startTimers();
+      } else {
+        stopTimers();
+      }
+    },
+    { threshold: 0.12 }
+  );
+  observer.observe(root);
 }
 
 function initSubmissionNotice() {
@@ -270,6 +337,5 @@ function initSubmitTracking() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadSections();
-  requestAnimationFrame(() => initInteractiveBackground());
+  void loadSections();
 });

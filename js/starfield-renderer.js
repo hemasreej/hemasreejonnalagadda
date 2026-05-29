@@ -170,7 +170,7 @@
     }
   }
 
-  function loadGpuStarsFromWorker(viewWidth, viewHeight) {
+  function loadGpuStarsFromWorker(viewWidth, viewHeight, lite) {
     return new Promise((resolve) => {
       if (!global.Worker) {
         resolve(null);
@@ -179,7 +179,7 @@
 
       let worker;
       try {
-        worker = new Worker("js/starfield-population-worker.js?v=16");
+        worker = new Worker("js/starfield-population-worker.js?v=17");
       } catch (error) {
         console.warn("Star worker unavailable:", error);
         resolve(null);
@@ -193,7 +193,7 @@
 
       worker.onmessage = (event) => finish(event.data);
       worker.onerror = () => finish(null);
-      worker.postMessage({ width: viewWidth, height: viewHeight });
+      worker.postMessage({ width: viewWidth, height: viewHeight, lite: !!lite });
     });
   }
 
@@ -322,8 +322,17 @@
     }
   }
 
-  function getDpr() {
-    return Math.min(1.75, window.devicePixelRatio || 1);
+  function isLiteBackground(width) {
+    const w = width || window.innerWidth;
+    if (w < 768) return true;
+    if (w < 1024 && window.matchMedia("(pointer: coarse)").matches) return true;
+    const cores = navigator.hardwareConcurrency || 8;
+    return cores <= 4 && w < 1200;
+  }
+
+  function getDpr(width) {
+    if (isLiteBackground(width)) return 1;
+    return Math.min(1.5, window.devicePixelRatio || 1);
   }
 
   function sizeCanvas2d(canvas, width, height, dpr) {
@@ -349,7 +358,12 @@
     starsLayerNear.className = "bg-stars near";
     bg.append(starsLayerFar, starsLayer, starsLayerNear);
 
-    for (let i = 0; i < 28; i += 1) {
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    const liteMode = isLiteBackground(width);
+    const meteorCount = liteMode ? 0 : width < 1200 ? 8 : 14;
+
+    for (let i = 0; i < meteorCount; i += 1) {
       const meteor = document.createElement("span");
       meteor.className = "bg-meteor";
       meteor.style.top = `${2 + ((i * 17) % 86)}%`;
@@ -370,12 +384,16 @@
     trailsCanvas.className = "bg-layer bg-trails";
     bg.append(gridCanvas, circuitCanvas, trailsCanvas, starCanvas);
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    if (liteMode) {
+      gridCanvas.hidden = true;
+      circuitCanvas.hidden = true;
+      trailsCanvas.hidden = true;
+    }
+
     let time = 0;
     let mouseX = width / 2;
     let mouseY = height / 2;
-    const dpr = getDpr();
+    let dpr = getDpr(width);
 
     const layers = {
       grid: sizeCanvas2d(gridCanvas, width, height, dpr),
@@ -394,23 +412,27 @@
       if (heavyStarted) return;
       heavyStarted = true;
       scheduleIdle(async () => {
-        await applyTiledCssStars(cssLayers);
-        const packed = await loadGpuStarsFromWorker(width, height);
+        if (!liteMode) {
+          await applyTiledCssStars(cssLayers);
+        }
+        const packed = await loadGpuStarsFromWorker(width, height, liteMode);
         if (packed && glLayer.ready) {
           glLayer.resize(width, height, dpr);
           glLayer.setStarBuffer(packed.data, packed.count);
           starsReady = true;
         }
-      }, 800);
+      }, liteMode ? 2000 : 800);
     }
 
     const nodes = Array.from({ length: 36 }, () => ({
       pulse: Math.random() * Math.PI * 2,
     }));
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let reducedMotion = motionQuery.matches;
     let running = true;
     let animId = 0;
+    let frame = 0;
 
     function drawGrid() {
       const ctx = layers.grid;
@@ -490,11 +512,31 @@
     function animate() {
       if (!running) return;
       animId = requestAnimationFrame(animate);
-      if (!reducedMotion) time += 0.016;
-      drawGrid();
-      drawCircuit();
-      drawTrails();
+      frame += 1;
+
+      if (reducedMotion) {
+        if (frame === 1 && glLayer.ready && starsReady) glLayer.draw(0);
+        return;
+      }
+
+      time += 0.016;
+
+      if (!liteMode) {
+        if (frame % 2 === 0) drawGrid();
+        if (frame % 2 === 0) drawCircuit();
+        drawTrails();
+      }
+
       if (glLayer.ready && starsReady) glLayer.draw(time);
+    }
+
+    function drawStaticFrame() {
+      if (!liteMode) {
+        drawGrid();
+        drawCircuit();
+        drawTrails();
+      }
+      if (glLayer.ready && starsReady) glLayer.draw(0);
     }
 
     let resizeTimer = 0;
@@ -503,32 +545,60 @@
       resizeTimer = window.setTimeout(() => {
         width = window.innerWidth;
         height = window.innerHeight;
-        layers.grid = sizeCanvas2d(gridCanvas, width, height, dpr);
-        layers.circuit = sizeCanvas2d(circuitCanvas, width, height, dpr);
-        layers.trails = sizeCanvas2d(trailsCanvas, width, height, dpr);
+        dpr = getDpr(width);
+        if (!liteMode) {
+          layers.grid = sizeCanvas2d(gridCanvas, width, height, dpr);
+          layers.circuit = sizeCanvas2d(circuitCanvas, width, height, dpr);
+          layers.trails = sizeCanvas2d(trailsCanvas, width, height, dpr);
+        }
         if (starsReady && glLayer.ready) {
-          void loadGpuStarsFromWorker(width, height).then((packed) => {
+          glLayer.resize(width, height, dpr);
+          void loadGpuStarsFromWorker(width, height, liteMode).then((packed) => {
             if (packed) glLayer.setStarBuffer(packed.data, packed.count);
           });
         }
       }, 280);
     }
 
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", (event) => {
-      mouseX = event.clientX;
-      mouseY = event.clientY;
-    });
+    window.addEventListener("resize", resize, { passive: true });
+    if (!liteMode) {
+      window.addEventListener(
+        "mousemove",
+        (event) => {
+          mouseX = event.clientX;
+          mouseY = event.clientY;
+        },
+        { passive: true }
+      );
+    }
     document.addEventListener("visibilitychange", () => {
-      running = !document.hidden;
-      if (running) {
+      if (document.hidden) {
+        running = false;
         cancelAnimationFrame(animId);
+        return;
+      }
+      running = true;
+      animate();
+    });
+    motionQuery.addEventListener("change", (event) => {
+      reducedMotion = event.matches;
+      if (reducedMotion) {
+        cancelAnimationFrame(animId);
+        drawStaticFrame();
+      } else if (running) {
         animate();
       }
     });
 
-    animate();
-    startHeavyLayers();
+    if (reducedMotion) {
+      scheduleIdle(() => {
+        startHeavyLayers();
+        scheduleIdle(drawStaticFrame, 1200);
+      }, 400);
+    } else {
+      animate();
+      startHeavyLayers();
+    }
     global.schedulePortfolioHeavyBg = startHeavyLayers;
   }
 
