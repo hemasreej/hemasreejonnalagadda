@@ -2698,6 +2698,14 @@ h3 { font-size: 1.5rem; }
 .achievement-card:nth-child(2) { --award-accent: #a78bfa; --award-soft: rgba(167, 139, 250, 0.16); --award-meta: #4ade80; }
 .achievement-card:nth-child(3) { --award-accent: #34d399; --award-soft: rgba(52, 211, 153, 0.16); --award-meta: #f472b6; }
 .achievement-card:nth-child(4) { --award-accent: #f97316; --award-soft: rgba(249, 115, 22, 0.14); --award-meta: #22d3ee; }
+.achievement-card:nth-child(5) { --award-accent: #eab308; --award-soft: rgba(234, 179, 8, 0.14); --award-meta: #38bdf8; }
+.achievement-card:nth-child(6) { --award-accent: #4ade80; --award-soft: rgba(74, 222, 128, 0.14); --award-meta: #f472b6; }
+.achievement-card:nth-child(7) { --award-accent: #a78bfa; --award-soft: rgba(167, 139, 250, 0.14); --award-meta: #fbbf24; }
+.achievement-card:nth-child(8) { --award-accent: #f472b6; --award-soft: rgba(244, 114, 182, 0.14); --award-meta: #22d3ee; }
+.achievement-card:nth-child(9) { --award-accent: #60a5fa; --award-soft: rgba(96, 165, 250, 0.14); --award-meta: #facc15; }
+.achievement-card:nth-child(10) { --award-accent: #2dd4bf; --award-soft: rgba(45, 212, 191, 0.14); --award-meta: #fb923c; }
+.achievement-card:nth-child(11) { --award-accent: #818cf8; --award-soft: rgba(129, 140, 248, 0.14); --award-meta: #4ade80; }
+.achievement-card:nth-child(12) { --award-accent: #ef4444; --award-soft: rgba(239, 68, 68, 0.14); --award-meta: #fbbf24; }
 
 /* =========================
    JOURNEY SECTION
