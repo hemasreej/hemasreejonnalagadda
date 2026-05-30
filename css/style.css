@@ -2370,6 +2370,14 @@ h3 { font-size: 1.5rem; }
   font-size: 0.9rem;
 }
 
+.footer-tagline {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--accent-cyan);
+  max-width: 220px;
+  line-height: 1.45;
+}
+
 .footer-socials {
   display: flex;
   gap: 16px;
@@ -3062,9 +3070,37 @@ h3 { font-size: 1.5rem; }
 .contact-intro {
   color: var(--text-secondary);
   max-width: 750px;
-  margin: 24px auto 60px;
+  margin: 24px auto 48px;
   line-height: 1.8;
   font-size: 1.05rem;
+}
+
+.contact-closing {
+  margin-top: 48px;
+  padding: 24px 28px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent-cyan) 30%, rgba(255, 255, 255, 0.1));
+  background: linear-gradient(145deg, rgba(12, 18, 32, 0.85), rgba(8, 12, 22, 0.9));
+}
+
+.contact-closing-label {
+  margin: 0 0 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+
+.contact-closing-text {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 .contact-content {
