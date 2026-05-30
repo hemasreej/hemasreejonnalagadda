@@ -140,7 +140,7 @@ function scheduleBackgroundInit() {
 
 function initScrollReveal() {
   const revealTargets = document.querySelectorAll(
-    ".timeline-item, .edu-item, .project-card, .achievement-card, .gallery-item"
+    ".timeline-item, .edu-item, .project-card, .achievement-card, .gallery-card"
   );
 
   if (!revealTargets.length) return;

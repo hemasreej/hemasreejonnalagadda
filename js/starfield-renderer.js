@@ -5,9 +5,9 @@
   const STRIDE = 12;
   const TILE_SIZE = 512;
   const CSS_TILE_LAYERS = [
-    { key: "far", count: 140, opacity: 0.9, seed: 101 },
-    { key: "mid", count: 180, opacity: 1, seed: 202 },
-    { key: "near", count: 140, opacity: 1, seed: 303 },
+    { key: "far", count: 140, opacity: 0.82, seed: 101 },
+    { key: "mid", count: 180, opacity: 0.92, seed: 202 },
+    { key: "near", count: 140, opacity: 0.88, seed: 303 },
   ];
 
   const VERTEX_SHADER = `
@@ -74,7 +74,7 @@
       if (v_spikes > 0.5 && v_alpha > 0.35 && v_dust < 0.5) {
         float angle = atan(uv.y, uv.x);
         float spike = pow(abs(sin(angle * 2.0)), 14.0) + pow(abs(cos(angle * 2.0)), 14.0);
-        color += v_rgb * spike * v_alpha * 0.22;
+        color += v_rgb * spike * v_alpha * 0.15;
       }
       if (glow < 0.004) discard;
       gl_FragColor = vec4(color, glow);
@@ -137,7 +137,7 @@
       const x = rnd() * TILE_SIZE;
       const y = rnd() * TILE_SIZE;
       const radius = 0.45 + rnd() * 1.1;
-      const opacity = (0.55 + rnd() * 0.4) * maxOpacity;
+      const opacity = (0.5 + rnd() * 0.35) * maxOpacity;
       const tint = rnd();
       if (tint < 0.82) ctx.fillStyle = `rgba(255,255,255,${opacity})`;
       else if (tint < 0.94) ctx.fillStyle = `rgba(255,236,210,${opacity})`;
@@ -179,7 +179,7 @@
 
       let worker;
       try {
-        worker = new Worker("js/starfield-population-worker.js?v=17");
+        worker = new Worker("js/starfield-population-worker.js?v=19");
       } catch (error) {
         console.warn("Star worker unavailable:", error);
         resolve(null);
@@ -412,9 +412,7 @@
       if (heavyStarted) return;
       heavyStarted = true;
       scheduleIdle(async () => {
-        if (!liteMode) {
-          await applyTiledCssStars(cssLayers);
-        }
+        await applyTiledCssStars(cssLayers);
         const packed = await loadGpuStarsFromWorker(width, height, liteMode);
         if (packed && glLayer.ready) {
           glLayer.resize(width, height, dpr);

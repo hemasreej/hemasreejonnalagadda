@@ -11,39 +11,60 @@
     <div class="projects-grid">
       <article class="project-card">
         <div class="project-info">
-          <h3>Designing Robust ESP32 Sensor Pipelines</h3>
-          <p>How to structure ADC sampling, filtering, and communication layers for reliable real-time behavior in noisy environments.</p>
+          <h3>Why 90% of C++ Features Are Not Used in Aerospace</h3>
+          <p>
+            Languages like Java, Python, and C# use a garbage collector — automatic memory
+            cleanup that runs in the background and can stall execution unpredictably.
+            Flight-critical systems must respond in real time, every time, with guaranteed
+            timing — which is why GC-based languages are banned in safety-critical code,
+            and why aerospace teams rely on a strict, minimal subset of C++.
+          </p>
           <div class="project-tags">
-            <span>ESP32</span><span>Firmware Architecture</span><span>Real-Time</span>
+            <span>C++</span><span>Aerospace</span><span>Flight Software</span><span>Real-Time</span>
           </div>
           <div class="project-links">
-            <a href="#" class="btn gold-btn">Read Article</a>
+            <a href="assets/pdfs/why_cpp_features_unused_in_aerospace.pdf" target="_blank" rel="noopener" class="btn gold-btn">Read Article</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <img
+          class="project-card-photo project-card-photo--device"
+          src="assets/images/bno055_breakout.png?v=1"
+          alt="Bosch BNO055 9-DOF absolute orientation sensor breakout board"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="project-info">
+          <h3>BNO055 — A Powerful 9-DOF Sensor by Bosch</h3>
+          <p>
+            Bosch’s BNO055 fuses accelerometer, gyro, and magnetometer data onboard with BSX3,
+            outputting Euler angles and quaternions over I²C or UART — no host-side Kalman
+            filter required. Ideal for wearables, robotics, and gait analysis.
+          </p>
+          <div class="project-tags">
+            <span>BNO055</span><span>IMU</span><span>Sensor Fusion</span><span>I²C</span>
+          </div>
+          <div class="project-links">
+            <a href="articles/bno055-sensor.html" class="btn gold-btn">Read Article</a>
           </div>
         </div>
       </article>
 
       <article class="project-card">
         <div class="project-info">
-          <h3>From Lab Prototype to Mission Telemetry</h3>
-          <p>A practical guide to scaling from student builds to high-throughput telemetry and DAQ for aerospace experiments.</p>
+          <h3>Code Coverage Analysis using GCOV and GCOVR</h3>
+          <p>
+            Running tests is not enough — coverage tools show whether your tests actually
+            exercised the code that matters. Notes on GCC gcov (.gcno / .gcda), and using
+            gcovr to generate HTML reports with executed, missed, and partially tested lines.
+          </p>
           <div class="project-tags">
-            <span>Telemetry</span><span>DAQ</span><span>Aerospace</span>
+            <span>GCC</span><span>GCOV</span><span>GCOVR</span><span>Testing</span>
           </div>
           <div class="project-links">
-            <a href="#" class="btn gold-btn">Read Article</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-info">
-          <h3>Fault Tolerance in Embedded Motion Systems</h3>
-          <p>Strategies for freeze detection, signal anomaly handling, watchdog recovery, and redundant estimation loops.</p>
-          <div class="project-tags">
-            <span>STM32</span><span>Sensor Fusion</span><span>Reliability</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn gold-btn">Read Article</a>
+            <a href="assets/pdfs/code_coverage_analysis_gcov_gcovr.pdf" target="_blank" rel="noopener" class="btn gold-btn">Read Article</a>
           </div>
         </div>
       </article>

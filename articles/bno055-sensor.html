@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BNO055 — 9-DOF Sensor | Hemasree Jonnalagadda</title>
+    <meta name="description" content="Technical notes on the Bosch BNO055 9-DOF absolute orientation sensor — fusion, I²C/UART, outputs, and operating modes." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+  </head>
+  <body>
+    <div id="interactive-bg" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../index.html">Hemasree</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About</a>
+          <a href="../education.html">Education</a>
+          <a href="../experience.html">Experience</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../achievements.html">Awards</a>
+          <a href="../gallery.html">Gallery</a>
+          <a href="../blogs.html">Blogs</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <a class="btn white-btn header-btn" href="../assets/pdfs/resume.pdf" target="_blank">Download Resume</a>
+      </div>
+    </header>
+
+    <main class="article-page">
+      <article class="article-container">
+        <a href="../blogs.html" class="article-back">← Back to Blogs</a>
+
+        <header class="article-header">
+          <p class="article-meta">Sensor notes · Bosch BNO055</p>
+          <h1>BNO055 — A Powerful 9-DOF Sensor by Bosch</h1>
+          <p class="article-lead">
+            The BNO055 from Bosch Sensortec is a smart 9-DOF absolute orientation sensor that
+            fuses accelerometer, gyroscope, and magnetometer data onboard — so you get
+            ready-to-use orientation without writing Kalman filters or quaternion math yourself.
+          </p>
+        </header>
+
+        <figure class="article-figure">
+          <img
+            src="../assets/images/bno055_breakout.png?v=1"
+            alt="Adafruit BNO055 9-DOF orientation sensor breakout board"
+            width="800"
+            height="600"
+            loading="eager"
+            decoding="async"
+          />
+          <figcaption>BNO055 breakout — I²C by default, optional UART, onboard BSX3 fusion.</figcaption>
+        </figure>
+
+        <section class="article-section">
+          <h2>What’s inside: 9 degrees of freedom</h2>
+          <p>The BNO055 internally combines three motion sensors:</p>
+          <ul>
+            <li>3-axis accelerometer</li>
+            <li>3-axis gyroscope</li>
+            <li>3-axis magnetometer</li>
+          </ul>
+          <p>
+            Unlike a raw IMU, the chip runs Bosch’s BSX3 fusion algorithm and exposes
+            high-level motion data directly over the bus.
+          </p>
+        </section>
+
+        <section class="article-section">
+          <h2>Communication: I²C and UART</h2>
+          <p>The BNO055 supports two interfaces:</p>
+          <ul>
+            <li><strong>I²C</strong> — default mode; widely supported by Arduino, ESP32, and STM32 libraries.</li>
+            <li><strong>UART (TX/RX)</strong> — useful when the I²C bus is crowded or for longer cable runs.</li>
+          </ul>
+        </section>
+
+        <section class="article-section">
+          <h2>Key outputs you can read</h2>
+          <ul>
+            <li>Euler angles — roll, pitch, yaw (degrees)</li>
+            <li>Quaternions — compact orientation for robotics and VR</li>
+            <li>Gravity vector — pure gravity direction</li>
+            <li>Linear acceleration — motion with gravity removed</li>
+            <li>Calibration status — gyro, accelerometer, and magnetometer</li>
+            <li>Internal temperature</li>
+          </ul>
+        </section>
+
+        <section class="article-section">
+          <h2>Onboard ARM Cortex-M0</h2>
+          <p>
+            The BNO055 is not just a sensor die — it includes an onboard ARM Cortex-M0 that runs
+            BSX3 in real time. That MCU collects and filters raw sensor data, performs fusion, and
+            streams orientation results to your host microcontroller.
+          </p>
+        </section>
+
+        <section class="article-section">
+          <h2>Operating modes</h2>
+          <p>Mode selection depends on your environment and what you need to measure:</p>
+          <ul>
+            <li><strong>NDOF</strong> — fusion of all 9 axes; best for full orientation outdoors.</li>
+            <li><strong>IMUPLUS</strong> — accelerometer + gyro only; useful indoors where magnetometer drift is an issue.</li>
+            <li><strong>ACCONLY, GYROONLY, MAGONLY</strong> — raw sensor readings when you want direct access.</li>
+          </ul>
+          <p>Modes can be changed in firmware as your application requirements change.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>Where it fits</h2>
+          <p>
+            The BNO055 is a strong fit for posture-tracking wearables, balancing robots, drone
+            attitude, and biomedical gait analysis — anywhere you need stable orientation without
+            implementing fusion on the host MCU.
+          </p>
+        </section>
+
+        <footer class="article-footer">
+          <a href="../blogs.html" class="btn white-btn">All blogs</a>
+          <a href="../projects.html" class="btn gold-btn">Related projects</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="footer-section">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <h3>Hemasree Jonnalagadda</h3>
+          <p>Firmware & Embedded Systems Engineer</p>
+        </div>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/hemasree-j-256387212/" target="_blank" rel="noopener" title="LinkedIn">🔗</a>
+          <a href="https://github.com/hemasreej" target="_blank" rel="noopener" title="GitHub">💻</a>
+          <a href="https://www.youtube.com/@hemasreejonnalagadda09" target="_blank" rel="noopener" title="YouTube">📹</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Hemasree Jonnalagadda</p>
+      </div>
+    </footer>
+
+    <script src="../js/starfield-renderer.js?v=19" defer></script>
+    <script src="../js/main.js?v=19" defer></script>
+  </body>
+</html>

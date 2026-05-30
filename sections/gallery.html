@@ -1,39 +1,130 @@
 <!-- =========================
      MILESTONES GALLERY
+     Add items by copying a gallery-card block below.
+     Types: gallery-card--photo | gallery-card--certificate
      ========================= -->
 <section id="gallery" class="gallery-section">
   <div class="gallery-container">
     <h2 class="section-title">Milestones Gallery</h2>
     <p class="gallery-intro">
-      A curated visual archive of my expos, awards, certificates, workshops, and major moments.
-      Replace each placeholder with your actual image files as we build your complete life portfolio.
+      Expos, collaborations, assistive prototypes, certificates, and awards — a visual archive
+      you can browse or open full size.
     </p>
 
     <div class="gallery-grid">
-      <figure class="gallery-item">
-        <div class="gallery-thumb placeholder">Childhood Memory</div>
-        <figcaption>Early learning moments and formative experiences.</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <div class="gallery-thumb placeholder">School Awards</div>
-        <figcaption>School achievements and academic recognitions.</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <div class="gallery-thumb placeholder">College Expo</div>
-        <figcaption>Project displays, technical events, and demos.</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <div class="gallery-thumb placeholder">Hackathon</div>
-        <figcaption>Competition moments and rapid innovation builds.</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <div class="gallery-thumb placeholder">Research Fellowship</div>
-        <figcaption>IIT collaboration snapshots and lab milestones.</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <div class="gallery-thumb placeholder">Certificates Wall</div>
-        <figcaption>Workshops, symposiums, patents, and honors.</figcaption>
-      </figure>
+
+      <!-- ——— Photo: landscape / expo booth ——— -->
+      <article class="gallery-card gallery-card--photo">
+        <a
+          class="gallery-card-media"
+          href="assets/images/gallery_impulse_2023_balavikasa_csrb.png?v=1"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="assets/images/gallery_impulse_2023_balavikasa_csrb.png?v=1"
+            alt="GaitRevive demo at Social Entrepreneurship Summit Impulse 2023 — Bala Vikasa CSRB"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="gallery-card-badge">Photo</span>
+        </a>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">Impulse 2023 — Social Startup Expo</h3>
+          <p class="gallery-card-caption">
+            Expo at the <strong>Bala Vikasa Center for Social and Responsible Business (CSRB)</strong>,
+            Ghatkesar–Keesara (Hyderabad), during the Social Entrepreneurship Summit —
+            <strong>Impulse 2023</strong> (Feb 2023, with Telangana State Innovation Cell). Demonstrating
+            <strong>GaitRevive</strong> at the Social Startup Expo alongside innovators in health,
+            assistive tech, and social impact.
+          </p>
+          <a
+            href="assets/images/gallery_impulse_2023_balavikasa_csrb.png?v=1"
+            class="gallery-card-link"
+            target="_blank"
+            rel="noopener"
+          >View full size</a>
+        </div>
+      </article>
+
+      <!-- ——— Photo: product / assistive device ——— -->
+      <article class="gallery-card gallery-card--photo">
+        <a
+          class="gallery-card-media"
+          href="assets/images/gallery_anantkaal_snakes_ladders_assistive_device.png?v=1"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="assets/images/gallery_anantkaal_snakes_ladders_assistive_device.png?v=1"
+            alt="Assistive Snakes and Ladders device for blind users — collaboration with Anantkaal LLP"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="gallery-card-badge">Photo</span>
+        </a>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">Anantkaal LLP — Assistive Snakes &amp; Ladders</h3>
+          <p class="gallery-card-caption">
+            Collaborated with <strong>Anantkaal Technologies LLP</strong> to develop an assistive
+            Snakes and Ladders device for blind and low-vision users — enabling independent,
+            accessible gameplay through tactile feedback and embedded controls on a dedicated
+            board interface.
+          </p>
+          <a
+            href="assets/images/gallery_anantkaal_snakes_ladders_assistive_device.png?v=1"
+            class="gallery-card-link"
+            target="_blank"
+            rel="noopener"
+          >View full size</a>
+        </div>
+      </article>
+
+      <!-- ——— Photo: portrait ——— -->
+      <article class="gallery-card gallery-card--photo gallery-card--portrait">
+        <a
+          class="gallery-card-media"
+          href="assets/images/gallery_jntu_gaitrevive_summit.png?v=2"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="assets/images/gallery_jntu_gaitrevive_summit.png?v=2"
+            alt="GaitRevive booth at JNTU summit — Recognition of Abnormal GAIT"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="gallery-card-badge">Photo</span>
+        </a>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">JNTU Summit — GaitRevive</h3>
+          <p class="gallery-card-caption">
+            Summit at JNTU (Jawaharlal Nehru Technological University) — presenting project
+            <strong>GaitRevive</strong> (Recognition of Abnormal GAIT).
+          </p>
+          <a
+            href="assets/images/gallery_jntu_gaitrevive_summit.png?v=2"
+            class="gallery-card-link"
+            target="_blank"
+            rel="noopener"
+          >View full size</a>
+        </div>
+      </article>
+
+      <!-- ——— Certificate: copy this block, uncomment, fill in paths ———
+      <article class="gallery-card gallery-card--certificate">
+        <a class="gallery-card-media" href="assets/images/your_certificate.png" target="_blank" rel="noopener">
+          <img src="assets/images/your_certificate.png" alt="Certificate title" loading="lazy" decoding="async" />
+          <span class="gallery-card-badge">Certificate</span>
+        </a>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">Award name</h3>
+          <p class="gallery-card-caption">Organizer · date · project name.</p>
+          <a href="assets/pdfs/your_certificate.pdf" class="gallery-card-link" target="_blank" rel="noopener">View PDF</a>
+        </div>
+      </article>
+      ——— -->
+
     </div>
   </div>
 </section>
