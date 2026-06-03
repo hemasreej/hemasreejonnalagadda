@@ -2365,17 +2365,16 @@ h3 { font-size: 1.5rem; }
   font-size: 1.2rem;
 }
 
-.footer-brand p {
-  color: var(--text-muted);
+.footer-role {
+  color: #cbd5e1;
   font-size: 0.9rem;
+  margin: 0 0 4px;
 }
 
-.footer-tagline {
-  margin-top: 8px;
+.footer-location {
+  color: var(--text-muted);
   font-size: 0.82rem;
-  color: var(--accent-cyan);
-  max-width: 220px;
-  line-height: 1.45;
+  margin: 0;
 }
 
 .footer-socials {
