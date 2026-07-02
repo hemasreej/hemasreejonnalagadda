@@ -2168,6 +2168,14 @@ h3 { font-size: 1.5rem; }
   padding: 28px 18px 18px;
 }
 
+.project-card img.project-card-photo--infographic {
+  background: #0a0f18;
+  height: 220px;
+  padding: 0;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .project-card img.project-card-photo--light {
   background: #f8fafc;
   height: 300px;
