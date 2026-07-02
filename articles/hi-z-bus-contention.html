@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Why High Impedance (Hi-Z) Exists | Hemasree Jonnalagadda</title>
+    <meta
+      name="description"
+      content="A narrative walkthrough of High Impedance (Hi-Z) and bus contention — why GPIO inputs disconnect their output drivers, and how shared buses like SPI and I²C depend on it."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+  </head>
+  <body>
+    <div id="interactive-bg" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../index.html">Hemasree</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About</a>
+          <a href="../education.html">Education</a>
+          <a href="../experience.html">Experience</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../achievements.html">Awards</a>
+          <a href="../gallery.html">Gallery</a>
+          <a href="../blogs.html">Blogs</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <a class="btn white-btn header-btn" href="../assets/pdfs/resume.pdf" target="_blank">Download Resume</a>
+      </div>
+    </header>
+
+    <main class="article-page">
+      <article class="article-container article-container--prose">
+        <a href="../blogs.html" class="article-back">← Back to Blogs</a>
+
+        <header class="article-header">
+          <p class="article-meta">Embedded fundamentals · GPIO &amp; buses</p>
+          <h1>Why High Impedance (Hi-Z) Exists: A Concept Every Embedded Engineer Should Understand</h1>
+        </header>
+
+        <figure class="article-figure article-figure--tall">
+          <img
+            src="../assets/images/hi-z-bus-contention-infographic.png?v=1"
+            alt="Infographic explaining High Impedance (Hi-Z) and bus contention with circuit diagrams and real-world examples"
+            width="682"
+            height="1024"
+            loading="eager"
+            decoding="async"
+          />
+          <figcaption>Hi-Z disconnects the output driver so external circuits can control the line without fighting the MCU.</figcaption>
+        </figure>
+
+        <div class="article-prose">
+          <p>
+            Whenever we start learning embedded systems, one of the very first things we do is configure a GPIO pin
+            either as an <strong>input</strong> or an <strong>output</strong>. We write something like
+            <code>pinMode(INPUT)</code> in Arduino, configure the <code>MODER</code> register in STM32, or set the
+            <code>TRIS</code> register in PIC. It feels like just another configuration step, and most of us move on
+            without thinking about what actually changes inside the microcontroller.
+          </p>
+
+          <p>But something very interesting happens internally when we configure a pin as an input.</p>
+
+          <p>To understand it, let's first think about what an <strong>output pin</strong> really does.</p>
+
+          <p>
+            Imagine you connect an LED to a GPIO pin. When your program writes a logic HIGH, the microcontroller
+            actively applies a voltage to that pin. When it writes a logic LOW, it actively connects the pin to ground.
+            In other words, the microcontroller is not simply storing a value in memory — it is
+            <strong>electrically driving the wire</strong>.
+          </p>
+
+          <p>
+            You can think of the GPIO pin as a person holding a rope. If that person pulls the rope upward, the rope
+            moves up. If they pull it downward, the rope moves down. The person is in complete control of the rope's
+            movement.
+          </p>
+
+          <p>Now let's replace that LED with a push button.</p>
+
+          <p>
+            Our goal is no longer to control the voltage. Instead, we want the button to decide whether the pin is HIGH
+            or LOW, while the microcontroller simply reads the result.
+          </p>
+
+          <p>At first glance, this seems straightforward. But here's an important question.</p>
+
+          <p>
+            <strong>What happens if the microcontroller still tries to drive the pin HIGH while the button connects that
+            same pin directly to ground?</strong>
+          </p>
+
+          <p>Now two different sources are trying to control the exact same wire.</p>
+
+          <p>The microcontroller says,</p>
+          <blockquote class="article-pullquote">"This wire must be 5V."</blockquote>
+          <p>The button says,</p>
+          <blockquote class="article-pullquote">"No, this wire is connected to 0V."</blockquote>
+
+          <p>
+            Both are correct from their own perspective, but electrically they are fighting each other. Instead of
+            exchanging information, current now flows directly from the power supply to ground through the output driver.
+          </p>
+
+          <p>This situation is called <strong>Bus Contention</strong>.</p>
+
+          <p>
+            Bus contention occurs whenever two or more devices attempt to drive the same signal line simultaneously,
+            especially when they try to drive opposite logic levels. One device may be forcing the line HIGH while
+            another forces it LOW. Since neither device is willing to let go, a large amount of current can flow
+            between them.
+          </p>
+
+          <p>
+            Depending on the circuit, this may simply produce incorrect logic levels, increase power consumption, or in
+            the worst case, permanently damage the output drivers.
+          </p>
+
+          <p>Clearly, we need a way to prevent this.</p>
+
+          <p>This is exactly why <strong>High Impedance</strong>, often written as <strong>Hi-Z</strong>, exists.</p>
+
+          <p>
+            When a GPIO pin is configured as an <strong>input</strong>, the microcontroller does something very
+            important internally. It disconnects its output driver from the pin. The pin is no longer connected to the
+            internal circuitry responsible for driving HIGH or LOW.
+          </p>
+
+          <p>In other words, the microcontroller lets go of the rope.</p>
+
+          <p>It doesn't pull the wire HIGH.</p>
+          <p>It doesn't pull the wire LOW.</p>
+          <p>It simply watches.</p>
+
+          <p>This electrical state is called <strong>High Impedance</strong>.</p>
+
+          <p>
+            The word "impedance" refers to how much a circuit resists current flow. In the Hi-Z state, the pin presents
+            an extremely high impedance to the outside world, meaning almost no current flows into or out of the
+            microcontroller through that pin. From the perspective of the external circuit, it's almost as if the
+            microcontroller isn't connected at all.
+          </p>
+
+          <p>
+            This allows another device — a button, a sensor, another microcontroller, or even an entire communication
+            bus — to safely determine the voltage on that line without interference.
+          </p>
+
+          <p>A simple way to think about it is this:</p>
+
+          <p>An <strong>output pin</strong> is like speaking into a conversation.</p>
+          <p>An <strong>input pin (Hi-Z)</strong> is like quietly listening.</p>
+          <p>If everyone speaks at once, communication fails.</p>
+          <p>If only one person speaks while everyone else listens, communication works perfectly.</p>
+
+          <p>This idea extends far beyond GPIO inputs.</p>
+
+          <p>
+            Consider an SPI bus with multiple slave devices. All of the slaves share the same MISO wire, but only one
+            slave is allowed to transmit data at any given moment. The selected slave actively drives the line, while
+            every other slave places its MISO pin into the High Impedance state. If two slaves attempted to drive MISO
+            simultaneously, their outputs could conflict, leading to bus contention.
+          </p>
+
+          <p>
+            The same principle appears in I²C communication, although it works a little differently. Devices on an I²C
+            bus never actively drive the line HIGH. They either pull it LOW or release it completely. Releasing the line
+            means entering the Hi-Z state, allowing the pull-up resistor to bring the line HIGH. This clever design
+            allows many devices to safely share the same communication wires.
+          </p>
+
+          <p>
+            Even inside computers, processors, RAM, Flash memory, and external peripherals share common data buses. At
+            any instant, only one device is allowed to drive the bus while every other device remains in High Impedance.
+            Without this mechanism, modern digital systems simply wouldn't function reliably.
+          </p>
+
+          <p>So the next time you configure a GPIO pin as an input, don't just think,</p>
+          <blockquote class="article-pullquote">"I'm making this pin an input."</blockquote>
+
+          <p>Think about what is actually happening electrically.</p>
+
+          <p>You are telling the microcontroller,</p>
+          <blockquote class="article-pullquote article-pullquote--emphasis">
+            "Stop driving this wire. Disconnect your output stage. Let the external world control the voltage, and
+            simply observe what happens."
+          </blockquote>
+
+          <p>
+            That single concept — <strong>letting go of the wire</strong> — is what High Impedance really means.
+          </p>
+
+          <p>
+            And once you understand High Impedance, you'll realize it isn't just a GPIO feature. It's one of the
+            fundamental ideas that makes shared communication buses, memory systems, and modern digital electronics
+            possible.
+          </p>
+        </div>
+
+        <footer class="article-footer">
+          <a href="../blogs.html" class="btn white-btn">All blogs</a>
+          <a href="../projects.html" class="btn gold-btn">Related projects</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="footer-section footer-section--minimal">
+      <p class="footer-bottom">© 2026 Hemasree Jonnalagadda</p>
+    </footer>
+
+    <script src="../js/starfield-renderer.js?v=19" defer></script>
+    <script src="../js/main.js?v=19" defer></script>
+  </body>
+</html>

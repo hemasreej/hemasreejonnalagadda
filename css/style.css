@@ -3444,3 +3444,49 @@ textarea:focus {
   padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Narrative blog articles */
+.article-container--prose {
+  max-width: 680px;
+}
+
+.article-figure--tall img {
+  max-height: none;
+}
+
+.article-prose p {
+  color: #cbd5e1;
+  line-height: 1.75;
+  font-size: 1rem;
+  margin: 0 0 1rem;
+}
+
+.article-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.article-prose code {
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  font-size: 0.9em;
+  color: #7dd3fc;
+  background: rgba(14, 116, 144, 0.15);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.article-pullquote {
+  margin: 0.5rem 0 1rem;
+  padding: 0.65rem 1rem;
+  border-left: 3px solid var(--accent-cyan);
+  background: rgba(8, 47, 73, 0.35);
+  color: #e2e8f0;
+  font-style: italic;
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+
+.article-pullquote--emphasis {
+  border-left-color: var(--accent-gold);
+  background: rgba(120, 53, 15, 0.2);
+  font-weight: 500;
+}
