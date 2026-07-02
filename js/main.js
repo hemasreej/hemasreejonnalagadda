@@ -4,6 +4,8 @@ const defaultSectionFiles = [
   "sections/footer.html",
 ];
 
+const SECTIONS_CACHE_VERSION = "20";
+
 async function loadSections() {
   const container = document.getElementById("page-sections");
   if (!container) return;
@@ -16,7 +18,8 @@ async function loadSections() {
 
   for (const file of sectionFiles) {
     try {
-      const response = await fetch(file);
+      const sectionUrl = `${file}${file.includes("?") ? "&" : "?"}_v=${SECTIONS_CACHE_VERSION}`;
+      const response = await fetch(sectionUrl);
       if (!response.ok) {
         console.error(`Failed to load ${file}: ${response.status}`);
         continue;
