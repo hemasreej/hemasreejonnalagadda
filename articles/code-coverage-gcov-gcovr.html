@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Coverage Analysis in C using GCOV and GCOVR | Hemasree Jonnalagadda</title>
+    <meta
+      name="description"
+      content="A practical walkthrough of code coverage analysis in C using GCC gcov (.gcno / .gcda) and gcovr for HTML reports — line, branch, and function coverage on Windows."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+  </head>
+  <body>
+    <div id="interactive-bg" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../index.html">Hemasree</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About</a>
+          <a href="../education.html">Education</a>
+          <a href="../experience.html">Experience</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../achievements.html">Awards</a>
+          <a href="../gallery.html">Gallery</a>
+          <a href="../blogs.html">Blogs</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <a class="btn white-btn header-btn" href="../assets/pdfs/resume.pdf" target="_blank">Download Resume</a>
+      </div>
+    </header>
+
+    <main class="article-page">
+      <article class="article-container">
+        <a href="../blogs.html" class="article-back">← Back to Blogs</a>
+
+        <header class="article-header">
+          <p class="article-meta">Testing · GCC · Embedded C</p>
+          <h1>Code Coverage Analysis in C using GCOV and GCOVR</h1>
+          <p class="article-lead">
+            Running tests is not enough — coverage tools show whether your tests actually exercised
+            the code that matters. Notes on GCC gcov (<code>.gcno</code> / <code>.gcda</code>), and using
+            gcovr to generate HTML reports with executed, missed, and partially tested lines.
+          </p>
+        </header>
+
+        <section class="article-section">
+          <h2>1. Introduction</h2>
+          <p>
+            In safety-critical and high-reliability systems such as <strong>defense systems</strong>,
+            <strong>aerospace software</strong>, <strong>automotive ECUs</strong>, and
+            <strong>embedded firmware</strong>, testing is not just about checking if the program runs
+            successfully. It is also important to verify whether <strong>every logical path in the code
+            has been executed during testing</strong>.
+          </p>
+          <p>This is where <strong>code coverage analysis</strong> becomes essential.</p>
+          <p>Code coverage tools analyze the execution of a program and determine:</p>
+          <ul>
+            <li>Which lines of code were executed</li>
+            <li>Which branches or decision paths were taken</li>
+            <li>Which functions were invoked</li>
+            <li>Which parts of the code were never tested</li>
+          </ul>
+          <p>
+            Coverage analysis helps developers identify <strong>untested code paths</strong>, which could
+            potentially hide bugs or incorrect logic.
+          </p>
+          <p>
+            For example, consider a radar-based defense decision system where a program decides whether to:
+          </p>
+          <ul>
+            <li>Ignore a distant target</li>
+            <li>Monitor a nearby target</li>
+            <li>Track a high-speed object</li>
+            <li>Launch countermeasures against a hostile target</li>
+          </ul>
+          <p>
+            If some of these decision paths are never executed during testing, the system may behave
+            incorrectly in real-world scenarios.
+          </p>
+          <p>
+            Therefore, <strong>code coverage analysis ensures that the test suite exercises as much of
+            the program logic as possible</strong>.
+          </p>
+        </section>
+
+        <section class="article-section">
+          <h2>2. Types of Code Coverage</h2>
+          <p>Code coverage tools typically measure multiple aspects of program execution.</p>
+
+          <h3 class="article-subheading">Line Coverage</h3>
+          <p>Indicates how many lines of source code were executed.</p>
+          <p><strong>Example:</strong> Lines executed: 94.74%</p>
+          <p>This means most lines were executed, but some lines were not tested.</p>
+
+          <h3 class="article-subheading">Branch Coverage</h3>
+          <p>
+            Measures whether both <strong>true and false outcomes of conditional statements</strong>
+            were executed.
+          </p>
+          <p><strong>Example condition:</strong></p>
+          <pre class="article-pre"><code>if (speed &gt; 300)</code></pre>
+          <p>Branch coverage checks if both cases occurred:</p>
+          <ul>
+            <li><code>speed &gt; 300</code></li>
+            <li><code>speed &lt;= 300</code></li>
+          </ul>
+
+          <h3 class="article-subheading">Function Coverage</h3>
+          <p>Measures whether every function defined in the program was executed.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>3. GCC Code Coverage Tools</h2>
+          <p>
+            The GNU toolchain provides a built-in coverage analysis mechanism through a set of related
+            tools and generated files. These tools work together to collect and analyze execution data.
+          </p>
+          <p>The primary components are:</p>
+          <table class="article-table">
+            <thead>
+              <tr>
+                <th>Tool</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>gcov</strong></td>
+                <td>Generates coverage statistics from execution data</td>
+              </tr>
+              <tr>
+                <td><strong>gcno</strong></td>
+                <td>Stores static program structure</td>
+              </tr>
+              <tr>
+                <td><strong>gcda</strong></td>
+                <td>Stores runtime execution data</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            These files are generated automatically when the program is compiled with coverage
+            instrumentation.
+          </p>
+        </section>
+
+        <section class="article-section">
+          <h2>4. Coverage Data Files</h2>
+
+          <h3 class="article-subheading">4.1 GCNO File</h3>
+          <p>GCNO stands for <strong>GNU Coverage Notes Object</strong> file.</p>
+          <p>
+            This file is generated during the compilation phase when coverage instrumentation is enabled
+            using the GCC <code>--coverage</code> option.
+          </p>
+          <p>The <code>.gcno</code> file contains static information about the program structure, including:</p>
+          <ul>
+            <li>control flow graph</li>
+            <li>basic blocks</li>
+            <li>branch relationships</li>
+            <li>mapping between source lines and compiled instructions</li>
+          </ul>
+
+          <h3 class="article-subheading">4.2 GCDA File</h3>
+          <p><strong>GCDA</strong> stands for <strong>GNU Coverage Data</strong> file.</p>
+          <p>This file is generated during <strong>program execution</strong>.</p>
+          <p>
+            When the program runs, the instrumentation inserted by the compiler records runtime
+            statistics and stores them in the <code>.gcda</code> file.
+          </p>
+          <p>The <code>.gcda</code> file contains dynamic execution information such as:</p>
+          <ul>
+            <li>how many times each line was executed</li>
+            <li>how many times each branch was taken</li>
+            <li>function invocation counts</li>
+          </ul>
+
+          <h3 class="article-subheading">4.3 GCOV</h3>
+          <p><strong>GCOV</strong> stands for <strong>GNU Coverage Tool</strong>.</p>
+          <p>
+            It is a utility provided by the GNU Compiler Collection (GCC) used to analyze the execution
+            of a program and determine how much of the source code was exercised during testing.
+          </p>
+          <p>
+            GCOV processes runtime data collected from instrumented programs and produces a detailed
+            report showing:
+          </p>
+          <ul>
+            <li>execution count of each line of code</li>
+            <li>branch execution information</li>
+            <li>function execution statistics</li>
+          </ul>
+        </section>
+
+        <section class="article-section">
+          <h2>5. Example Program (<code>radar.c</code>)</h2>
+          <figure class="article-figure article-figure--tall">
+            <img
+              src="../assets/images/gcov/image1.png?v=1"
+              alt="radar.c example source code for a defense decision system"
+              width="1200"
+              height="1600"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              A radar-based decision system with multiple branches — ideal for demonstrating line and
+              branch coverage.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="article-section">
+          <h2>6. Running Coverage Analysis</h2>
+          <p>
+            The following steps demonstrate how to run coverage analysis using GCC and GCOV on Windows.
+          </p>
+
+          <h3 class="article-subheading">Step 1 — Compile with Coverage Instrumentation</h3>
+          <pre class="article-pre"><code>gcc --coverage radar.c -o radar</code></pre>
+          <p>This command performs two actions:</p>
+          <ul>
+            <li>Compiles the program</li>
+            <li>Inserts coverage instrumentation</li>
+          </ul>
+          <p>Output files created are <code>radar.exe</code> and <code>radar.gcno</code>.</p>
+
+          <h3 class="article-subheading">Step 2 — Execute the Program</h3>
+          <figure class="article-figure">
+            <img
+              src="../assets/images/gcov/image2.png?v=1"
+              alt="Terminal output from running the instrumented radar program"
+              width="1200"
+              height="500"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Example program output. Running the executable also generates <code>radar.gcda</code>.</figcaption>
+          </figure>
+
+          <h3 class="article-subheading">Step 3 — Run GCOV Analysis</h3>
+          <pre class="article-pre"><code>gcov radar.c</code></pre>
+          <figure class="article-figure">
+            <img
+              src="../assets/images/gcov/image3.png?v=1"
+              alt="gcov command output showing line and branch coverage statistics"
+              width="1200"
+              height="300"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>GCOV reads <code>.gcno</code> and <code>.gcda</code> to produce a text-based coverage report.</figcaption>
+          </figure>
+        </section>
+
+        <section class="article-section">
+          <h2>7. Visual Coverage Reports using GCOVR</h2>
+          <p>
+            While <code>gcov</code> produces text-based output, <strong>GCOVR</strong> converts coverage
+            data into visual reports.
+          </p>
+          <p>These reports can be generated in formats such as:</p>
+          <ul>
+            <li><strong>HTML</strong></li>
+            <li><strong>XML</strong></li>
+            <li><strong>JSON</strong></li>
+            <li><strong>SonarQube format</strong></li>
+          </ul>
+
+          <h3 class="article-subheading">Installing GCOVR (Windows)</h3>
+          <pre class="article-pre"><code>pip install --user gcovr</code></pre>
+
+          <h3 class="article-subheading">Generating HTML Coverage Report</h3>
+          <pre class="article-pre"><code>python -m gcovr -r . --html --html-details -o coverage.html</code></pre>
+          <p>This generates <code>.html</code> and <code>.js</code> files.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>8. Coverage Visualization</h2>
+          <figure class="article-figure article-figure--tall">
+            <img
+              src="../assets/images/gcov/image4.jpeg?v=1"
+              alt="GCOVR HTML coverage report summary page"
+              width="1200"
+              height="1300"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>GCOVR HTML report — summary view with line, branch, and function coverage percentages.</figcaption>
+          </figure>
+          <p>The HTML report highlights source code based on execution.</p>
+          <table class="article-table">
+            <thead>
+              <tr>
+                <th>Color</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Green</td>
+                <td>Executed lines</td>
+              </tr>
+              <tr>
+                <td>Red</td>
+                <td>Unexecuted lines</td>
+              </tr>
+              <tr>
+                <td>Yellow</td>
+                <td>Partially covered branches</td>
+              </tr>
+            </tbody>
+          </table>
+          <figure class="article-figure">
+            <img
+              src="../assets/images/gcov/image5.png?v=1"
+              alt="GCOVR HTML report showing source code with green, red, and yellow coverage highlighting"
+              width="1200"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Per-line coverage highlighting makes untested branches immediately visible.</figcaption>
+          </figure>
+        </section>
+
+        <section class="article-section">
+          <h2>9. Key Takeaways</h2>
+          <ul>
+            <li>Code coverage measures how much of the program logic is tested.</li>
+            <li>GCC provides built-in coverage instrumentation using <code>gcov</code>.</li>
+            <li>Compilation with <code>--coverage</code> generates <code>.gcno</code> files.</li>
+            <li>Program execution generates <code>.gcda</code> files containing runtime data.</li>
+            <li><code>gcov</code> converts execution data into human-readable reports.</li>
+            <li>Tools like GCOVR transform raw coverage data into visual HTML reports.</li>
+            <li>Coverage reports highlight untested code paths, helping developers improve test suites.</li>
+          </ul>
+        </section>
+
+        <footer class="article-footer">
+          <a href="../blogs.html" class="btn white-btn">All blogs</a>
+          <a href="../projects.html" class="btn gold-btn">Related projects</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="footer-section footer-section--minimal">
+      <p class="footer-bottom">© 2026 Hemasree Jonnalagadda</p>
+    </footer>
+
+    <script src="../js/starfield-renderer.js?v=20" defer></script>
+    <script src="../js/main.js?v=20" defer></script>
+  </body>
+</html>

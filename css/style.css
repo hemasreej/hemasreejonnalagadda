@@ -3470,3 +3470,51 @@ textarea:focus {
   background: rgba(120, 53, 15, 0.2);
   font-weight: 500;
 }
+
+.article-subheading {
+  font-size: 1rem;
+  color: #86efac;
+  margin: 14px 0 6px;
+}
+
+.article-pre {
+  margin: 8px 0 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(8, 12, 22, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+}
+
+.article-pre code {
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  font-size: 0.9rem;
+  color: #fde68a;
+  background: transparent;
+  padding: 0;
+}
+
+.article-table {
+  width: 100%;
+  margin: 8px 0 12px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.article-table th,
+.article-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+}
+
+.article-table th {
+  background: rgba(14, 116, 144, 0.2);
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.article-table td strong {
+  color: #7dd3fc;
+}
